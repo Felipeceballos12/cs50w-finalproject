@@ -4,6 +4,7 @@ let localStorageData = localStorage.getItem("addProductsInCart");
 // if defined then parse stored data or use empty array
 let productsInCart = localStorageData ? JSON.parse(localStorageData) : [];
 
+// PART OF ADD PRODUCT TO CART
 for (let i = 0; i < btnAddProductsToCart.length; i++) {
     let btnAddProductToCart = btnAddProductsToCart[i];
     
@@ -83,20 +84,15 @@ addCartCounter();
 
 let containerCartPage = document.getElementById("cartContainer");
 
-if (localStorageData) {
+if (localStorageData && productsInCart.length > 0) {
     
     // Creando los elementos a usar en cart page
+    let countProducts = counterProdcuts(productsInCart);
     let titlePage = document.createElement('h3');
     let countItems = document.createElement('p');
     let containerProducts = document.createElement('div');
     
     // Agregando los datos a los elementos
-    let countProducts = 0;
-    
-    productsInCart.forEach(productInCart => {
-        countProducts += productInCart.amount;
-    });
-
     titlePage.innerHTML = "SHOPPING BAG";
     countItems.innerHTML = `${countProducts} ITEM(S)`;
     containerProducts.className = "containerCartproducts";
@@ -106,15 +102,26 @@ if (localStorageData) {
     containerCartPage.appendChild(countItems);
     containerCartPage.appendChild(containerProducts);
 
+    // Recorriendo un Loop para mostrar los productos agregados al cart
     productsInCart.forEach(productInCart => {
         
         let containerProduct = document.createElement('div');
 
         containerProduct.innerHTML = `
                         <img class="imgCartProduct img_p" src="${ productInCart.img }" alt="Zara">
+                        <input type="hidden" class="product_items" id="${ productInCart.id }">
                         <div class="description_cart_product">
                             <p class="titleCartProduct title_p">${ productInCart.title }</p>
                             <p class="priceCartProduct price_p">${ productInCart.price }</p>
+                            <div class="addLessItem">
+                                <a class="btnLessProduct">
+                                    <img src="https://img.icons8.com/material-rounded/12/000000/minus-math--v1.png"/>
+                                </a>
+                                <span class="titleCartProduct amount_p">${ productInCart.amount }</span>
+                                <a class="btnAddProduct">
+                                    <img src="https://img.icons8.com/material-sharp/12/000000/plus-math--v1.png"/>
+                                </a>
+                            </div>
                             <a class="btnRemove">
                                 <img src="https://img.icons8.com/material-outlined/16/000000/trash--v2.png"/>
                             </a>    
@@ -123,14 +130,67 @@ if (localStorageData) {
 
         containerProducts.appendChild(containerProduct);
         containerProduct.className = 'containerCartProduct';
+        
     });
+
+    // ADD AND REDUCER ITEMS
+
+
+    // DELETE ITEM FROM CART
+    let btnRemove = document.getElementsByClassName("btnRemove");
+    for (let i = 0; i < btnRemove.length; i++) {
+        
+        btnRemove[i].addEventListener("click", function(event) {
+           
+            /*
+                Esta parte es muy importante por que con ella vamos a poder
+                eliminar items del localStorage sin tener que crear una nueva variable
+            */
+            if (i > -1) {
+                productsInCart.splice(i, 1);
+                localStorage.setItem('addProductsInCart', JSON.stringify(productsInCart));
+            }
+
+            // Modificando el cuerpo del cart.html
+            let productClickedRemove = event.target;
+            let productItemRemove = productClickedRemove.parentElement.parentElement.parentElement;
+
+            productItemRemove.style.display = "none";
+            let countItemAfterRemove = counterProdcuts(productsInCart);
+
+            if (countItemAfterRemove > 0) {
+                countItems.innerHTML = `${countItemAfterRemove} ITEM(S)`;
+                addCartCounter();
+            } else {
+                titlePage.style.display = "none";
+                countItems.style.display = "none";
+                containerProducts.style.display = "none";
+                addCartCounter();
+                cartEmpty(containerCartPage);
+            }
+            
+        });
+    } 
 
 
 } else {
+    cartEmpty(containerCartPage);
+}
+
+function counterProdcuts(localData) {
+    let countProducts = 0;
     
+    localData.forEach(productInCart => {
+        countProducts += productInCart.amount;
+    });
+
+    return countProducts;
+}
+
+function cartEmpty(cartContainer) {
     let menssage = document.createElement('p');
     menssage.id = "noProductsInBasket";
     menssage.innerHTML = "Your basket is empty";
     
-    containerCartPage.appendChild(menssage);
+    cartContainer.appendChild(menssage);
 }

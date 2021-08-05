@@ -791,4 +791,25 @@ footer {
     margin: 1rem 0;
 }
 
+.addLessItem {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.btnLessProduct {
+    margin-right: 0.9rem;
+    cursor: pointer;
+}
+
+.btnAddProduct {
+    margin-left: 0.9rem;
+    cursor: pointer;
+}
+
+.btnRemove {
+    cursor: pointer;
+}
+
 /* END CART SECTION */

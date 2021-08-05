@@ -19,7 +19,7 @@ for (let i = 0; i < btnAddProductsToCart.length; i++) {
             // Adding items to variable keeping track of local storage
             productsInCart.push(getProductValues(productItem));
         }
-        console.log('hello');
+        
         // Saving the new item into the local storage
         localStorage.setItem('addProductsInCart', JSON.stringify(productsInCart));
 

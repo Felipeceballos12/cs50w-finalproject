@@ -134,7 +134,33 @@ if (localStorageData && productsInCart.length > 0) {
     });
 
     // ADD AND REDUCER ITEMS
+    let btnAddAmountProduct = document.getElementsByClassName("btnAddProduct");
+    for (let x = 0; x < btnAddAmountProduct.length; x++) {
+        btnAddAmountProduct[x].addEventListener('click', () => {
+            productsInCart[x].amount += 1;
+            localStorage.setItem('addProductsInCart', JSON.stringify(productsInCart));
 
+            document.querySelector(".amount_p").innerText = productsInCart[x].amount;
+            let countItemAfterAdd = counterProdcuts(productsInCart);
+            countItems.innerHTML = `${countItemAfterAdd} ITEM(S)`;
+            addCartCounter();
+        });
+    }
+
+    let btnLessAmountProduct = document.getElementsByClassName("btnLessProduct");
+    for (let j = 0; j < btnLessAmountProduct.length; j++) {
+        btnLessAmountProduct[j].addEventListener('click', () => {
+            if (productsInCart[j].amount > 1) {
+                productsInCart[j].amount -= 1;
+                localStorage.setItem('addProductsInCart', JSON.stringify(productsInCart));
+
+                document.querySelector(".amount_p").innerText = productsInCart[j].amount;
+                let countItemAfterReduce = counterProdcuts(productsInCart);
+                countItems.innerHTML = `${countItemAfterReduce} ITEM(S)`;
+                addCartCounter();
+            }
+        });
+    }
 
     // DELETE ITEM FROM CART
     let btnRemove = document.getElementsByClassName("btnRemove");

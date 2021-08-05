@@ -1,0 +1,42 @@
+{% extends "shopping/layout.html" %}
+
+{% block body %}
+
+    <main>
+        <section class="container">
+            <div id="headerOfTheLinks">
+                <p class="namesPresentation">KIDS</p>
+                <div class="decorationLinea"></div>
+                <p class="namesPresentation">WOMAN</p>
+                <div class="decorationLinea"></div>
+                <p class="namesPresentation">MAN</p> 
+            </div>
+            <div class="containerImgs">
+               {% load static %} <img id="kid" src="{% static 'shopping/imgs/principalKid.jpg' %}" alt="Zara">
+               {% load static %} <img id="woman" src="{% static 'shopping/imgs/Woman.png' %}" alt="Zara">
+               {% load static %} <img id="man" src="{% static 'shopping/imgs/Man.png' %}" alt="Zara">
+            </div>
+        </section>
+        <section class="quotes">
+            <h2>WHERE WE BELONG.</h2>
+            <h4>Colombia Fashion</h4>
+        </section>
+    </main>
+    <footer>
+        <div id="footerInfo">
+            <div id="footerNameCompany">
+                <h1>FELIPEX</h1>
+            </div>
+            <div id="footerRedes">
+                <a class="linksRedes" href="https://www.facebook.com/FelipeCeballosc" target="_blank">Facebook</a>
+                <a class="linksRedes" href="https://www.linkedin.com/in/luisfelipeceballos/" target="_blank">LinkedIn</a>
+                <a class="linksRedes" href="https://www.instagram.com/felipeceballosc/" target="_blank">Instagram</a>
+                <a class="linksRedes" href="https://github.com/Felipeceballos12" target="_blank">Github</a>
+            </div>
+        </div>
+        <div id="footerCopyright">
+            <p>Copyright 2021 Felipex all rights reserved.</p>
+        </div>
+    </footer>
+
+{% endblock %}

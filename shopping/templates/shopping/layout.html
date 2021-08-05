@@ -1,0 +1,160 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Shopping{% endblock %}</title>
+    
+    <!-- My own css -->
+    <link rel="stylesheet" href="{% static 'shopping/style.css' %}"/>
+    
+    <script src="{% static 'shopping/javascript/index.js' %}"></script>
+    <script src="{% static 'shopping/javascript/cartStore.js' %}" async></script>
+</head>
+<body>
+    <div id="Sidenav" class="sidenavshop">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
+            <img src="https://img.icons8.com/ios-filled/25/000000/delete-sign--v1.png"/>
+        </a>
+        <div class="sideNavMenu">
+            <ul>
+                <li>
+                    <a class="linksOfSidenavMenu" onclick="openPage('Kids')">KIDS</a>
+                    <div id="Kids" class="content">
+                        <ul class="ulListaCategories">
+                            <li class="categoryProducto">
+                                <a href="{% url 'products' 'Kids' 'T-Shirts' %}">T-SHIRTS</a>    
+                            </li>
+                            <li class="categoryProducto">
+                                <a href="{% url 'products' 'Kids' 'Jeans' %}">JEANS</a>
+                            </li>
+                            <li class="categoryProducto">
+                                <a href="{% url 'products' 'Kids' 'Trousers' %}">TROUSERS</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a class="linksOfSidenavMenu" onclick="openPage('Woman')">WOMAN</a>
+                    <div id="Woman" class="content">
+                        <ul class="ulListaCategories">
+                            <li class="categoryProducto">
+                                <a href="{% url 'products' 'Woman' 'T-Shirts' %}">T-SHIRTS</a>
+                            </li>
+                            <li class="categoryProducto">
+                                <a href="{% url 'products' 'Woman' 'Jeans' %}">JEANS</a>
+                            </li>
+                            <li class="categoryProducto">
+                                <a href="{% url 'products' 'Woman' 'Trousers' %}">TROUSERS</a>
+                            </li>
+                            <li class="categoryProducto">
+                                <a  href="{% url 'products' 'Woman' 'Suits' %}">SUITS</a>
+                            </li>
+                        </ul>
+                    </div>  
+                </li>
+                <li>
+                    <a class="linksOfSidenavMenu" onclick="openPage('Man')">MAN</a>
+                    <div id="Man" class="content">
+                        <ul class="ulListaCategories">
+                            <li class="categoryProducto">
+                                <a href="{% url 'products' 'Man' 'T-Shirts' %}">T-SHIRTS</a>
+                            </li>
+                            <li class="categoryProducto">
+                                <a href="{% url 'products' 'Man' 'Jeans' %}">JEANS</a>
+                            </li>
+                            <li class="categoryProducto">
+                                <a href="{% url 'products' 'Man' 'Trousers' %}">TROUSERS</a>
+                            </li>
+                            <li class="categoryProducto">
+                                <a href="{% url 'products' 'Man' 'Suits' %}">SUITS</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div id="ContainerHeaderSidenav">
+            <div class="headerSideNav">
+                <a class="linksOfHeaderSidenav" onclick="openPageMobile('KIDS')">KIDS</a>
+                <a class="linksOfHeaderSidenav" onclick="openPageMobile('WOMAN')">WOMAN</a>
+                <a class="linksOfHeaderSidenav" onclick="openPageMobile('MAN')">MAN</a>
+            </div>
+            <div id="KIDS" class="tabcontent">
+                <ul class="ulListaCategories">
+                    <li>
+                        <a href="{% url 'products' 'Kids' 'T-Shirts' %}">T-SHIRTS</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'products' 'Kids' 'Jeans' %}">JEANS</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'products' 'Kids' 'Trousers' %}">TROUSERS</a>
+                    </li>
+                </ul>
+            </div>
+            <div id="WOMAN" class="tabcontent">
+                <ul class="ulListaCategories">
+                    <li class="categoryProducto">
+                        <a href="{% url 'products' 'Woman' 'T-Shirts' %}">T-SHIRTS</a>
+                    </li>
+                    <li class="categoryProducto">
+                        <a href="{% url 'products' 'Woman' 'Jeans' %}">JEANS</a>
+                    </li>
+                    <li class="categoryProducto">
+                        <a href="{% url 'products' 'Woman' 'Trousers' %}">TROUSERS</a>
+                    </li>
+                    <li class="categoryProducto">
+                        <a  href="{% url 'products' 'Woman' 'Suits' %}">SUITS</a>
+                    </li>
+                </ul>
+            </div>
+            <div id="MAN" class="tabcontent">
+                <ul class="ulListaCategories">
+                    <li  class="categoryProducto">
+                        <a href="{% url 'products' 'Man' 'T-Shirts' %}">T-SHIRTS</a>
+                    </li>
+                    <li  class="categoryProducto">
+                        <a href="{% url 'products' 'Man' 'Jeans' %}">JEANS</a>
+                    </li>
+                    <li class="categoryProducto">
+                        <a href="{% url 'products' 'Man' 'Trousers' %}">TROUSERS</a>
+                    </li>
+                    <li  class="categoryProducto">
+                        <a href="{% url 'products' 'Man' 'Suits' %}">SUITS</a>
+                    </li>
+                </ul>
+            </div>
+        </div>    
+    </div>
+    <header>
+        <nav>
+           <div class="btnMenu" id="btnMenuLinea" onclick="openNav()">
+               <div class="btnMenuBtn">
+                    <div class="btnFirstandLastLinea"></div>
+                    <div class="btnSecondandThirdLinea"></div>
+                    <div class="btnMediumLinea"></div>
+                    <div class="btnSecondandThirdLinea"></div>
+                    <div class="btnFirstandLastLinea"></div>
+                </div>
+            </div>
+            <div class="navLinks">
+                <div class="link1">
+                    <a class="linkSearch">SEARCH</a>
+                </div>
+                {% if user.is_authenticated %}
+                    <a class="link2">{{ user.first_name|upper }} {{ user.last_name|upper }}</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="link2">LOG IN</a>
+                {% endif %}
+                <a href="{% url 'cart' %}" class="link3">CART(0)</a>
+            </div> 
+        </nav>
+    </header>
+    {% block body %}
+    {% endblock %}
+</body>
+</html>

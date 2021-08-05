@@ -1,0 +1,794 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    color: #000;
+    line-height: 1.4;
+    letter-spacing: .2px;
+    overflow-wrap: break-word !important;
+}
+
+/* Side Nav  Start*/
+
+.sidenavshop {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background: #fff;
+    opacity: 95%;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenavshop a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #000;
+    display: block;
+}
+
+.sidenavshop .closebtn {
+    position: absolute;
+    top: 0;
+    margin-top: 25px;
+    background-color: #fff;
+}
+
+@media screen and (max-height: 450px) {
+.sidenavshop {padding-top: 15px;}
+
+} 
+
+#ContainerHeaderSidenav {
+    display: none;
+}
+
+.headerSideNav {
+    display: none;
+}
+
+.sideNavMenu {
+    margin-top: 2rem;
+}
+
+.linksOfSidenavMenu {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin: 0 2rem;
+    cursor: pointer;
+}
+
+.content {
+    display: none;
+    margin: 1rem 2rem 2rem;
+}
+
+.ulListaCategories {
+    list-style: none;
+    color: #000;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.categoryProducto {
+    text-decoration: none;
+    color: #000;
+}
+
+.tabcontent {
+    display: none;
+    height: 90%;
+    text-align: center;
+    margin-top: 3rem;
+    overflow: hidden;
+}
+
+
+/* Side Nav End */
+
+/* Header Start */
+
+header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 80px;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: 100%;
+}
+
+/* Btn Menu Start */
+
+.btnMenu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.btnMenuBtn {
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.btnFirstandLastLinea {
+    width: 30px;
+    height: 2px;
+    background-color: #000;
+}
+
+.btnSecondandThirdLinea {
+    width: 22.5px;
+    height: 2px;
+    background-color: #000;
+    margin: 0.2rem 0;
+}
+
+.btnMediumLinea {
+    width: 15px;
+    height: 2px;
+    background-color: #000;
+}
+
+.btnFirstandLastLinea, .btnSecondandThirdLinea, .btnMediumLinea {
+    transition: 0.4s;
+}
+
+/* Btn Menu End */
+
+.navLinks {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.link1 {
+    width: 100px;
+    padding-top: 0.2rem;
+    margin-right: 80px;
+    border-bottom: 1px solid #000;
+}
+
+.link2 {
+    margin-right: 20px;
+}
+
+.link3 {
+    margin-right: 20px;
+}
+
+.link1, .link2, .link3 {
+    font-size: 12px;
+    font-weight: 500;
+    text-decoration: none;
+    color: #000;
+}
+
+/* Header End */
+
+.container {
+    width: 100%;
+    height: 100%;
+}
+
+#headerOfTheLinks {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+}
+
+.namesPresentation {
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.decorationLinea {
+    width: 145px;
+    height: 2px;
+    background-color: #000;
+    margin: 0 30px;
+}
+
+.containerImgs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#woman {
+    width: 300px;
+    margin: 2rem 0;
+}
+
+#kid {
+    width: 250px;
+    margin-top: 2rem;
+}
+
+#man {
+    width: 250px;
+    margin-bottom: 2rem;
+}
+
+.quotes {
+    text-align: center;
+    margin: 1rem 0 3.125rem;
+    padding: 1rem 3rem;
+}
+
+.quotes h2 {
+    font-size: 30px;
+}
+
+.quotes h4 {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+
+/* Footer Start */
+
+footer {
+    background-color: #F3F3F3;
+    height: 100%;
+}
+
+#footerInfo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2rem;
+}
+
+#footerNameCompany {
+    width: 50%;
+    height: 167px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#footerNameCompany h1 {
+    font-size: 40px;
+    text-align: center;
+}
+
+#footerRedes {
+    width: 50%;
+    height: 167px;
+    border-left: 2px solid #000;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.linksRedes {
+    font-weight: 500;
+    margin: 1rem 2rem;
+    text-decoration: #000;
+    color: #000;
+}
+
+#footerCopyright {
+    padding: 2rem 0;
+}
+
+#footerCopyright p {
+    text-align: center;
+    font-weight: 300;
+}
+
+/* Footer End */
+
+
+/* Media Queries */
+
+
+
+/* Tablet Start */
+
+@media screen and (max-width: 786px){
+    
+    #woman {
+        width: 250px;
+    }
+    
+    #man, #kid {
+        width: 190px;
+    }
+
+    .decorationLinea {
+        width: 127px;
+        margin: 0 30px;
+    }
+
+}
+
+/* Tablet End */
+
+
+/* Mobile Start*/
+
+@media screen and (max-width : 576px){
+    .link1 {
+        display: none;
+    }
+
+    #ContainerHeaderSidenav {
+        display: block;
+    }
+
+    .sideNavMenu, content {
+        display: none;
+    }
+
+    .linksOfHeaderSidenav {
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin: 0 2rem;
+        cursor: pointer;
+    }
+
+    #headerOfTheLinks {
+        display: none;
+    }
+
+    .headerSideNav {
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+    
+    .containerImgs {
+        flex-direction: column;
+    }
+
+    #man, #kid, #woman {
+        width: 250px;
+    }
+    
+    #footerNameCompany {
+        width: 100%;
+        height: 100%;
+    }
+
+    #footerRedes {
+        width: 100%;
+        border: none;
+        height: 100%;
+    }
+    
+    .Quotes {
+        border-bottom: 2px solid #000;
+        border-top: 2px solid #000;
+    }
+}
+
+/* Mobile End */
+
+
+/* LOGIN PART */
+.mainLogin {
+    height: 95vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 3rem;
+}
+
+#formLogin {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 3rem;
+}
+
+#formContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+#message_alert {
+    background-color: #F25C69;
+    padding: 0.2rem 0;
+    color: #F3F3F3;
+    text-align: center;
+    margin-top: 1rem;
+    box-shadow: 0 14px 15px -8px rgba(0, 0, 0, 0.27);
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+.inputsLogin {
+    border-bottom: 1px solid #000;
+    outline: none;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    margin-top: 1rem;
+    padding: 0.5rem 0.5rem 0.5rem 0;
+}
+
+::placeholder {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: .4px;
+    color: #000;
+}
+
+#recoverPassword {
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin: 2rem 0 1rem;
+}
+
+#btnLogin {
+    padding: 0.7rem 0.5rem;
+    background-color: #000;
+    color: #F3F3F3;
+    font-size: 0.7rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    margin-top: 2rem;
+}
+
+.register {
+    width: 300px;
+}
+
+#firstLinea {
+    font-size: 0.8rem;
+    margin: 1rem 0;
+}
+
+#secondLinea {
+    font-size: 0.8rem;
+    margin-top: 1rem;
+    margin-bottom: 2.46rem;
+}
+
+.register a {
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    padding: 0.6rem 0;
+    background-color: #000;
+    color: #F3F3F3;
+    font-size: 0.7rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+#registerLink {
+    display: none;
+}
+
+/* Mobile Start*/
+
+@media screen and (max-width : 576px){
+    #formLogin {
+        margin-right: 0;
+    }
+    
+    .register {
+        display: none;
+    }
+
+    #registerLink {
+        display: block;
+        font-size: 0.9rem;
+        font-weight: bold;
+    }
+
+    #registerLink a {
+        border-bottom: 1px solid #000;
+    }
+
+}
+
+
+/* REGISTER */
+
+#mainRegister {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+#registerUser h1 {
+    margin-bottom: 2rem;
+}
+
+.inputRegister {
+    width: 250px;
+    border-bottom: 1px solid #000;
+    outline: none;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    margin-bottom: 1rem;
+    margin-right: 2rem;
+    padding: 0.5rem 0.5rem 0.5rem 0;
+}
+
+.btnCreateAccount {
+    width: 250px;
+    padding: 0.7rem 0.5rem;
+    background-color: #000;
+    color: #F3F3F3;
+    font-size: 0.7rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    margin-top: 2rem;   
+}
+
+
+/* PRODUCTS SECTION */
+
+#mainProducts {
+    margin-bottom: 3rem;
+}
+
+.containerAlertProdcuts {
+    width: 100%;
+    height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+#productsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 3rem;
+}
+
+#productsContainer a {
+    text-decoration: none;
+    color: #000;
+}
+
+.productContainer {
+    margin: 1rem;
+}
+
+.img_product {
+    width: 190px;
+    height: 281.2px;
+}
+
+.title_product, .price_product {
+    font-size: 0.5rem;
+    font-weight: 700;
+}
+
+/* END PRODUCTS SECTION */
+
+
+/* PRODUCT SECTION */
+#mainProductSolo {
+    margin-bottom: 3rem;
+}
+
+#containerProductSolo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0 2rem 7rem;
+}
+
+.productSolo {
+    width: 353px;
+    height: 531px;
+}
+
+.containerDescriptionProduct {
+    width: 300px;
+    margin: 2rem 3rem;
+}
+
+.containerDescriptionProduct p {
+    padding-top: 1rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+#priceProductSolo {
+    margin-bottom: 2rem;
+}
+
+#btnCart {
+    padding: 0.7rem 6.7rem;
+    background-color: #000;
+    color: #F3F3F3;
+    text-decoration: none;
+    font-size: 0.7rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+}
+
+#titleOtherProduct {
+    margin-left: 1.31rem;
+}
+
+#otherProductsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.productItem {
+    margin: 1rem 1rem 1rem 1.31rem;
+}
+
+.productItem a {
+    text-decoration: none;
+    color: #000;
+}
+
+.img_otherProduct {
+    width: 180px;
+    height: 281.2px;
+}
+
+#priceOtherProduct {
+    margin-bottom: 0.8rem;
+}
+
+#btnCartOtherProduct {
+    padding: 0.3rem 2rem;
+    color: #000;
+    background-color: #fff;
+    text-decoration: none;
+    text-align: center;
+    font-size: 0.5rem;
+    font-weight: 400;
+    border: 1px solid #000;
+    cursor: pointer;
+}
+
+/* Media Queries */
+
+
+/* Mobile Start*/
+
+@media screen and (max-width : 576px){
+    .productSolo {
+        width: 100%;
+        height: 100%;
+    }
+
+    #btnCart {
+        padding: 0.7rem 2rem;
+    }
+
+    #otherProductsContainer {
+        justify-content: center;
+    }
+}
+
+/* END PRODUCT SECTION */
+
+/* ADMIN SECTION */
+#mainCreateProduct {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+#mainCreateProduct h3 {
+    margin-bottom: 2rem;
+}
+
+.formCreateProducts {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputCreateProducts {
+    width: 250px;
+    border: 1px solid #000;
+    border-radius: 3px;
+    outline: none;
+    margin: 0.5rem 0;
+    padding: 0.5rem 0.5rem;
+}
+
+#btnCreateProduct {
+    width: 100%;
+    background-color: #000;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.5rem 2rem;
+    margin-top: 1rem;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* END ADMIN SECTION */
+
+/* CART SECTION */
+
+#cartContainer {
+    margin: 2rem 0 3rem 1.31rem;
+}
+
+#noProductsInBasket {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.containerCartproducts {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1rem;
+}
+
+.containerCartProduct {
+    width: 360px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin: 1rem;
+}
+
+.imgCartProduct {
+    width: 186px;
+}
+
+.description_cart_product {
+    margin-left: 1rem;
+}
+
+.titleCartProduct {
+    font-size: 0.6rem;
+    font-weight: 600;
+}
+
+.priceCartProduct {
+    font-size: 0.6rem;
+    font-weight: 600;
+    margin: 1rem 0;
+}
+
+/* END CART SECTION */

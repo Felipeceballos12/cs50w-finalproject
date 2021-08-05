@@ -1,0 +1,44 @@
+{% extends "shopping/layout.html" %}
+
+{% block body %}
+
+    <main id="mainRegister">
+        <section id="registerUser">
+            <h1>PERSONAL DETAILS</h1>
+
+            {% if message %}
+                <div id="message_alert">
+                    {{ message }}
+                </div>
+            {% endif %} 
+
+            <form action="{% url 'register' %}" method="POST">
+                {% csrf_token %}
+                <div>
+                    <input class="inputRegister" type="email" placeholder="Email" name="email" required>
+                </div>
+                <div>
+                    <input class="inputRegister" type="password" placeholder="Password" name="password" required>
+                    <input class="inputRegister" type="password" placeholder="Repeat Password" name="password_confirmation" required>
+                </div>
+                <div>
+                    <input class="inputRegister" type="text" placeholder="First Name" name="first_name" required>
+                    <input class="inputRegister" type="text" placeholder="Last Name" name="last_name" required>
+                </div> 
+                <div>
+                    <input class="inputRegister" type="text" placeholder="Cedula" name="cedula" required>
+                </div>
+                <div>
+                    <input class="inputRegister" type="number" placeholder="Phone" name="phone_number" required>
+                    <input class="inputRegister" type="text" placeholder="Address" name="address" required>
+                </div>
+                <div>
+                    <input class="inputRegister" type="text" placeholder="City" name="city" required>
+                    <input class="inputRegister" type="text" placeholder="Country" name="country" required>
+                </div>
+                <button class="btnCreateAccount" type="submit">CREATE ACCOUNT</button>
+            </form>
+        </section>
+    </main>
+
+{% endblock %}

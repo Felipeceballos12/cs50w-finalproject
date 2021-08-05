@@ -1,0 +1,79 @@
+{% extends "shopping/layout.html" %}
+
+{% block body %}
+
+    <main id="mainProductSolo">
+        <div id="containerProductSolo">
+            <input type="hidden" class="product_items" id="{{ product.id }}">
+            <img class="productSolo img_p" src="{{ product.img_url }}" alt="Zara">
+            <div class="containerDescriptionProduct">
+                <h3 class="title_p">{{ product.title|upper }}</h3>
+                <p>{{ product.description }}</p>
+                <p id="priceProductSolo" class="price_p">{{ product.price }} USD</p>
+                {% if isProduct %}
+                    {% if in_cart_product %}
+
+                        <a href="{% url 'cart' %}" id="btnCart" class="btnAddCart">Add to basket</a>
+
+                    {% else %}
+                    
+                        <form action="{% url 'add_cart' product.id product.id %}" method="POST">
+                            {% csrf_token %}
+                            <input type="submit" id="btnCart" class="btnAddCart" value="Add to basket" />
+                        </form>
+                    
+                    {% endif %}
+                {% else %}
+                    {% if user.is_authenticated %}
+                        <a href="#" id="btnCart" class="btnAddCart">Add to basket</a>
+                    {% else %}
+                        <a href="{% url 'login' %}" id="btnCart">Add to basket</a>
+                    {% endif %}    
+                {% endif %}    
+            </div>
+        </div>
+        <h3 id="titleOtherProduct">YOU MAY ALSO LIKE</h3>
+        <div id="otherProductsContainer">
+            {% for other_product in other_products %}
+                <div class="productItem">
+                    <a href="{% url 'product' other_product.id %}" class="product_items" id="{{ other_product.id }}">
+                        <div>
+                            <img class="img_otherProduct img_p" src="{{ other_product.img_url }}" alt="Zara">
+                            <p class="title_product title_p">{{ other_product.title|upper }}</p>
+                            <p id="priceOtherProduct" class="price_product price_p">{{ other_product.price }} USD</p>
+                        </div>
+                    </a>
+                    {% if isProduct %}
+                        <form action="{% url 'add_cart' other_product.id product.id %}" method="POST">
+                            {% csrf_token %}
+                            <input type="submit" id="btnCartOtherProduct" class="btnAddCart" value="Add to basket"/>
+                        </form>
+                    {% else %}
+                        {% if user.is_authenticated %}
+                            <a href="#" id="btnCartOtherProduct" class="btnAddCart">Add to basket</a>
+                        {% else %}
+                            <a href="{% url 'login' %}" id="btnCartOtherProduct">Add to basket</a>
+                        {% endif %}    
+                    {% endif %}
+                </div>        
+            {% endfor %}    
+        </div>    
+    </main>
+    <footer>
+        <div id="footerInfo">
+            <div id="footerNameCompany">
+                <h1>FELIPEX</h1>
+            </div>
+            <div id="footerRedes">
+                <a class="linksRedes" href="https://www.facebook.com/FelipeCeballosc" target="_blank">Facebook</a>
+                <a class="linksRedes" href="https://www.linkedin.com/in/luisfelipeceballos/" target="_blank">LinkedIn</a>
+                <a class="linksRedes" href="https://www.instagram.com/felipeceballosc/" target="_blank">Instagram</a>
+                <a class="linksRedes" href="https://github.com/Felipeceballos12" target="_blank">Github</a>
+            </div>
+        </div>
+        <div id="footerCopyright">
+            <p>Copyright 2021 Felipex all rights reserved.</p>
+        </div>
+    </footer>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "shopping/layout.html" %}
+
+{% block body %}
+
+    <main id="mainProducts">
+        {% if message_alert %}
+        <div class="containerAlertProdcuts">
+            {{ message_alert }}
+        </div>
+        {% endif %}
+
+        <section id="productsContainer">
+            {% for product in products %}
+            <a href="{% url 'product' product.id %}">
+                <div class="productContainer">
+                    <img class="img_product" src="{{ product.img_url }}" alt="Zara">
+                    <p class="title_product">{{ product.title|upper }}</p>
+                    <p class="price_product">{{ product.price }} USD</p>
+                </div>
+            </a>    
+            {% endfor %}    
+        </section>
+    </main>
+    <footer>
+        <div id="footerInfo">
+            <div id="footerNameCompany">
+                <h1>FELIPEX</h1>
+            </div>
+            <div id="footerRedes">
+                <a class="linksRedes" href="https://www.facebook.com/FelipeCeballosc" target="_blank">Facebook</a>
+                <a class="linksRedes" href="https://www.linkedin.com/in/luisfelipeceballos/" target="_blank">LinkedIn</a>
+                <a class="linksRedes" href="https://www.instagram.com/felipeceballosc/" target="_blank">Instagram</a>
+                <a class="linksRedes" href="https://github.com/Felipeceballos12" target="_blank">Github</a>
+            </div>
+        </div>
+        <div id="footerCopyright">
+            <p>Copyright 2021 Felipex all rights reserved.</p>
+        </div>
+    </footer>
+
+{% endblock %}

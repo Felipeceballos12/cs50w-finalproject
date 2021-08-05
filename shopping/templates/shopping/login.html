@@ -1,0 +1,34 @@
+{% extends "shopping/layout.html" %}
+
+{% block body %}
+
+    <main class="mainLogin">
+        <div id="formLogin">
+            <h2>LOG IN</h2>
+
+            {% if message %}
+                <div id="message_alert">{{ message }}</div>
+            {% endif %}
+
+            <form action="{% url 'login' %}" method="POST" id="formContainer">
+                {% csrf_token %}
+                <input class="inputsLogin" type="email" placeholder="Email" name="email" required>
+                <input class="inputsLogin" type="password" placeholder="Password" name="password" required>
+                <button type="submit" id="btnLogin">LOG IN</button>
+            </form>
+            <a id="recoverPassword">HAVE YOU FORGOTTEN YOUR PASSWORD?</a>    
+            <p id="registerLink">DON’T HAVE AN ACCOUNT? <a>REGISTER</a></p>
+        </div>
+        <div class="register">
+            <h2>REGISTER</h2>
+            <p id="firstLinea">
+                IF YOU STILL DON'T HAVE AN ACCOUNT, USE THIS OPTION TO ACCESS THE REGISTRATION FORM.
+            </p>
+            <p id="secondLinea">
+                BY GIVING US YOUR DETAILS, PURCHASING IN <strong>FELIPEX.COM</strong> WILL BE FASTER AND AN ENJOYABLE EXPERIENCE.
+            </p>
+            <a href="{% url 'register' %}">CREATE ACCOUNT</a> 
+        </div>
+    </main>
+
+{% endblock %}

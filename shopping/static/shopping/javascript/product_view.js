@@ -53,7 +53,11 @@ for (let i = 0; i < btnAddProductsToCart.length; i++) {
         
         addCartCounter(productsInCart);
 
-        // PART OF ADD BTN "PROCESS ORDER" WHEN THE USER CLICK ON FIRST TIME TO THE BTN "ADD TO BASKET"
+        /* 
+            PART OF ADD BTN "PROCESS ORDER" WHEN THE USER CLICK ON FIRST TIME TO THE BTN "ADD TO BASKET"
+
+            - en la decision usamos "i == 0" ya que representa el primer boton de "Add to basket"
+        */
         if (i == 0 && countClicks == 0) {
             addBtnProcessOrder(true);
             countClicks++;

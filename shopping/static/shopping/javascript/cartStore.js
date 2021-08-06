@@ -4,6 +4,15 @@ let localStorageData = localStorage.getItem("addProductsInCart");
 // if defined then parse stored data or use empty array
 let productsInCart = localStorageData ? JSON.parse(localStorageData) : [];
 
+/*
+let btnCarPage = document.createElement('a');
+btnCarPage.innerHTML = "Process order";
+btnCarPage.href = "/cart";
+btnCarPage.id = "btnCarPage";
+
+document.querySelector(".containerDescriptionProduct").appendChild(btnCarPage);
+*/
+
 // PART OF ADD PRODUCT TO CART
 for (let i = 0; i < btnAddProductsToCart.length; i++) {
     let btnAddProductToCart = btnAddProductsToCart[i];

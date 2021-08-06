@@ -629,7 +629,8 @@ footer {
     margin-bottom: 2rem;
 }
 
-#btnCart {
+#btnCart, #btnCarPage {
+    display: block;
     padding: 0.7rem 6.7rem;
     background-color: #000;
     color: #F3F3F3;
@@ -638,6 +639,7 @@ footer {
     font-weight: 600;
     border: none;
     cursor: pointer;
+    margin-bottom: 1rem;
 }
 
 #titleOtherProduct {
@@ -692,7 +694,7 @@ footer {
         height: 100%;
     }
 
-    #btnCart {
+    #btnCart, #btnCarPage {
         padding: 0.7rem 2rem;
     }
 
@@ -843,6 +845,10 @@ footer {
     letter-spacing: .1px;
     border: none;
     cursor: pointer;
+}
+
+.btnPayAction:hover {
+    background-color: #333;
 }
 
 /* Media Queries */

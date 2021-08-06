@@ -1,30 +1,6 @@
 import { productsInCart } from './localStorageData.js';
 import { addCartCounter } from './util.js';
 
-function addBtnProcessOrder(idFound) {
-
-    if (idFound) {
-        document.querySelector("#btnCarPage").style.display = "block";
-    }
-}
-
-function findIdProduct(storeData) {
-
-    let productId = document.getElementsByClassName("product_items")[0].id;
-    let idFound = false;
-    let indice = 0;
-    
-    while(indice < storeData.length && idFound == false){
-        if (storeData[indice].id == productId) {
-            idFound = true;
-        }
-
-        indice++;
-    }
-
-    return idFound;
-}
-
 let idFound = findIdProduct(productsInCart);
 addBtnProcessOrder(idFound);
 
@@ -41,7 +17,7 @@ for (let i = 0; i < btnAddProductsToCart.length; i++) {
                         ? productClicked.parentElement.parentElement
                         : productClicked.parentElement;
 
-        let productFind = findProductRepeatInCart(productItem);
+        let productFind = findProductRepeatInCart(productsInCart, productItem);
 
         if (productFind != true) {
             // Adding items to variable keeping track of local storage
@@ -82,14 +58,14 @@ function getProductValues(productItem) {
     };
 }
 
-function findProductRepeatInCart(productItemClicked) {
+function findProductRepeatInCart(localData, productItemClicked) {
     let productFind = false;
     let indice = 0;
     let productId = productItemClicked.getElementsByClassName("product_items")[0].id;
 
-    while(indice < productsInCart.length && productFind == false){
-        if (productsInCart[indice].id == productId) {
-            productsInCart[indice].amount += 1;
+    while(indice < localData.length && productFind == false){
+        if (localData[indice].id == productId) {
+            localData[indice].amount += 1;
             productFind = true;
         }
 
@@ -97,6 +73,31 @@ function findProductRepeatInCart(productItemClicked) {
     }
 
     return productFind;
+}
+
+// Part of add btnProcessOrder
+function addBtnProcessOrder(idFound) {
+
+    if (idFound) {
+        document.querySelector("#btnCarPage").style.display = "block";
+    }
+}
+
+function findIdProduct(storeData) {
+
+    let productId = document.getElementsByClassName("product_items")[0].id;
+    let idFound = false;
+    let indice = 0;
+    
+    while(indice < storeData.length && idFound == false){
+        if (storeData[indice].id == productId) {
+            idFound = true;
+        }
+
+        indice++;
+    }
+
+    return idFound;
 }
 
 addCartCounter(productsInCart);

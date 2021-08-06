@@ -1,3 +1,36 @@
+/* Btn para ir al menu con su genero */
+let btnGenderLinks = document.getElementsByClassName("btnGenderLink");
+
+for (let x = 0; x < btnGenderLinks.length; x++) {
+    btnGenderLinks[x].addEventListener('click', () => {
+        if (x == 0) {
+            if (window.screen.width <= 576) {
+                openNav();
+                openPageMobile('KIDS');
+            } else {
+                openNav();
+                openPage('Kids');
+            }
+        } else if (x == 1) {
+            if (window.screen.width <= 576) {
+                openNav();
+                openPageMobile('WOMAN');
+            } else {
+                openNav();
+                openPage('Woman');
+            }
+        } else {
+            if (window.screen.width <= 576) {
+                openNav();
+                openPageMobile('MAN');
+            } else {
+                openNav();
+                openPage('Man');
+            }
+        }
+    });
+}
+
 /* 
     El codigo de abajo solo funciona para el side navbar donde vamos
     a poder desplegar todo lo que tenemos en nuestras categorias y generos

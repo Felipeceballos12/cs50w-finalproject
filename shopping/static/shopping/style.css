@@ -213,6 +213,10 @@ nav {
     align-items: center;
 }
 
+.btnGenderLink {
+    cursor: pointer;
+}
+
 #woman {
     width: 300px;
     margin: 2rem 0;

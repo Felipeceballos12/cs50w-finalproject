@@ -65,15 +65,15 @@ if (localStorageData && productsInCart.length > 0) {
                             <p class="priceCartProduct price_p">${ productInCart.price }</p>
                             <div class="addLessItem">
                                 <a class="btnLessProduct">
-                                    <img src="https://img.icons8.com/material-rounded/12/000000/minus-math--v1.png"/>
+                                    <img src="https://img.icons8.com/material-rounded/12/000000/minus-math--v1.png" alt="btnless"/>
                                 </a>
                                 <p class="titleCartProduct amount_p">${ productInCart.amount }</p>
                                 <a class="btnAddProduct">
-                                    <img src="https://img.icons8.com/material-sharp/12/000000/plus-math--v1.png"/>
+                                    <img src="https://img.icons8.com/material-sharp/12/000000/plus-math--v1.png" alt="btnplus"/>
                                 </a>
                             </div>
                             <a class="btnRemove">
-                                <img src="https://img.icons8.com/material-outlined/16/000000/trash--v2.png"/>
+                                <img src="https://img.icons8.com/material-outlined/16/000000/trash--v2.png" alt="trash"/>
                             </a>    
                         </div>    
         `;

@@ -21,3 +21,7 @@
     </main>
 
 {% endblock %}
+
+{% block script %}
+    {% load static %} <script src="{% static 'shopping/javascript/cartStore.js' %}" type="module" async></script>
+{% endblock %}

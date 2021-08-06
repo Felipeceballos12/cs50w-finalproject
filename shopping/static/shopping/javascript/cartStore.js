@@ -1,95 +1,13 @@
-let btnAddProductsToCart = document.getElementsByClassName("btnAddCart");
-
-let localStorageData = localStorage.getItem("addProductsInCart");
-// if defined then parse stored data or use empty array
-let productsInCart = localStorageData ? JSON.parse(localStorageData) : [];
-
-/*
-let btnCarPage = document.createElement('a');
-btnCarPage.innerHTML = "Process order";
-btnCarPage.href = "/cart";
-btnCarPage.id = "btnCarPage";
-
-document.querySelector(".containerDescriptionProduct").appendChild(btnCarPage);
-*/
-
-// PART OF ADD PRODUCT TO CART
-for (let i = 0; i < btnAddProductsToCart.length; i++) {
-    let btnAddProductToCart = btnAddProductsToCart[i];
-    
-    btnAddProductToCart.addEventListener('click', function(event) {
-        let productClicked = event.target;
-        let productItem = productClicked.id == "btnCart"
-                        ? productClicked.parentElement.parentElement
-                        : productClicked.parentElement;
-
-        let productFind = findProductRepeatInCart(productItem);
-
-        if (productFind != true) {
-            // Adding items to variable keeping track of local storage
-            productsInCart.push(getProductValues(productItem));
-        }
-        
-        // Saving the new item into the local storage
-        localStorage.setItem('addProductsInCart', JSON.stringify(productsInCart));
-
-        addCartCounter();    
-    });
-}
-
-function getProductValues(productItem) {
-
-    let id = productItem.getElementsByClassName("product_items")[0].id;
-    let img = productItem.getElementsByClassName("img_p")[0].src;
-    let title = productItem.getElementsByClassName("title_p")[0].innerText;
-    let price = productItem.getElementsByClassName("price_p")[0].innerText;
-    let amount  = 1;
-
-    return {
-        id,
-        img,
-        title,
-        price,
-        amount
-    };
-}
-
-function findProductRepeatInCart(productItemClicked) {
-    let productFind = false;
-    let indice = 0;
-    let productId = productItemClicked.getElementsByClassName("product_items")[0].id;
-
-    while(indice < productsInCart.length && productFind == false){
-        if (productsInCart[indice].id == productId) {
-            productsInCart[indice].amount += 1;
-            productFind = true;
-        }
-
-        indice++;
-    }
-
-    return productFind;
-}
-
-function addCartCounter() {
-    let cartLink = document.getElementsByClassName("link3")[0];
-    let count = 0;
-
-    if (productsInCart) {
-        productsInCart.forEach(productInCart => {
-            count += productInCart.amount;
-        });
-        cartLink.innerHTML = `CART(${count})`;
-    }
-}
-
-addCartCounter();
+import { productsInCart, localStorageData } from './localStorageData.js';
+import { addCartCounter } from './util.js';
 
 /*
     - CART PAGE SECTION
     
     NOTA: Esta seccion deberia estar separada de store?
 */
+
+addCartCounter(productsInCart);
 
 let containerCartPage = document.getElementById("cartContainer");
 
@@ -179,7 +97,7 @@ if (localStorageData && productsInCart.length > 0) {
             console.log(amountProduct[x]);
             let countItemAfterAdd = counterProdcuts(productsInCart);
             countItems.innerHTML = `${countItemAfterAdd} ITEM(S)`;
-            addCartCounter();
+            addCartCounter(productsInCart);
         });
     }
 
@@ -193,7 +111,7 @@ if (localStorageData && productsInCart.length > 0) {
                 amountProduct[j].innerText = productsInCart[j].amount;
                 let countItemAfterReduce = counterProdcuts(productsInCart);
                 countItems.innerHTML = `${countItemAfterReduce} ITEM(S)`;
-                addCartCounter();
+                addCartCounter(productsInCart);
                 totalPayForProducts(productsInCart, totalToPay);
             }
         });
@@ -223,7 +141,7 @@ if (localStorageData && productsInCart.length > 0) {
 
             if (countItemAfterRemove > 0) {
                 countItems.innerHTML = `${countItemAfterRemove} ITEM(S)`;
-                addCartCounter();
+                addCartCounter(productsInCart);
                 totalPayForProducts(productsInCart, totalToPay);
 
             } else {
@@ -231,7 +149,7 @@ if (localStorageData && productsInCart.length > 0) {
                 countItems.style.display = "none";
                 containerProducts.style.display = "none";
                 containerPayAction.style.display = "none";
-                addCartCounter();
+                addCartCounter(productsInCart);
                 cartEmpty(containerCartPage);
             }
             

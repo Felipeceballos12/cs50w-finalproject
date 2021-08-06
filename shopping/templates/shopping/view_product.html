@@ -29,7 +29,10 @@
                     {% else %}
                         <a href="{% url 'login' %}" id="btnCart">Add to basket</a>
                     {% endif %}    
-                {% endif %}    
+                {% endif %}
+                <div class="containerBtnProcessOrder">
+                    <a href="{% url 'cart' %}" id="btnCarPage">Process order</a>
+                </div>    
             </div>
         </div>
         <h3 id="titleOtherProduct">YOU MAY ALSO LIKE</h3>
@@ -76,4 +79,8 @@
         </div>
     </footer>
 
+{% endblock %}
+
+{% block script %}
+    {% load static %} <script src="{% static 'shopping/javascript/product_view.js' %}" type="module" async></script>
 {% endblock %}

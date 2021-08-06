@@ -91,16 +91,39 @@ if (localStorageData && productsInCart.length > 0) {
     let titlePage = document.createElement('h3');
     let countItems = document.createElement('p');
     let containerProducts = document.createElement('div');
+    let containerPayAction = document.createElement('div');
+    let btnPayAction = document.createElement('a');
+    let subContainerOfTotal = document.createElement('div');
+    let totalToPay = document.createElement('h5');
+
+    
     
     // Agregando los datos a los elementos
     titlePage.innerHTML = "SHOPPING BAG";
     countItems.innerHTML = `${countProducts} ITEM(S)`;
+    btnPayAction.innerHTML = "CONTINUE";
+    btnPayAction.href = "#";
+    totalPayForProducts(productsInCart, totalToPay);
+
+
+    // Agregando class a los elementos
+    countItems.className = "countItems";
     containerProducts.className = "containerCartproducts";
+    containerPayAction.className = "containerPayAction";
+    subContainerOfTotal.className = "subContainerOfTotal";
+    btnPayAction.className = "btnPayAction";
     
-    // Agregando elementos a su padre
+    
+    // Agregando elementos a su padre containerCartPage
     containerCartPage.appendChild(titlePage);
     containerCartPage.appendChild(countItems);
     containerCartPage.appendChild(containerProducts);
+    containerCartPage.appendChild(containerPayAction);
+
+    // Agregando elementos a su padre containerPayAction
+    containerPayAction.appendChild(subContainerOfTotal);
+    containerPayAction.appendChild(btnPayAction);
+    subContainerOfTotal.appendChild(totalToPay);
 
     // Recorriendo un Loop para mostrar los productos agregados al cart
     productsInCart.forEach(productInCart => {
@@ -117,7 +140,7 @@ if (localStorageData && productsInCart.length > 0) {
                                 <a class="btnLessProduct">
                                     <img src="https://img.icons8.com/material-rounded/12/000000/minus-math--v1.png"/>
                                 </a>
-                                <span class="titleCartProduct amount_p">${ productInCart.amount }</span>
+                                <p class="titleCartProduct amount_p">${ productInCart.amount }</p>
                                 <a class="btnAddProduct">
                                     <img src="https://img.icons8.com/material-sharp/12/000000/plus-math--v1.png"/>
                                 </a>
@@ -134,13 +157,17 @@ if (localStorageData && productsInCart.length > 0) {
     });
 
     // ADD AND REDUCER ITEMS
+    let amountProduct = document.getElementsByClassName("amount_p");
     let btnAddAmountProduct = document.getElementsByClassName("btnAddProduct");
     for (let x = 0; x < btnAddAmountProduct.length; x++) {
         btnAddAmountProduct[x].addEventListener('click', () => {
             productsInCart[x].amount += 1;
             localStorage.setItem('addProductsInCart', JSON.stringify(productsInCart));
 
-            document.querySelector(".amount_p").innerText = productsInCart[x].amount;
+            totalPayForProducts(productsInCart, totalToPay);
+            
+            amountProduct[x].innerText = productsInCart[x].amount;
+            console.log(amountProduct[x]);
             let countItemAfterAdd = counterProdcuts(productsInCart);
             countItems.innerHTML = `${countItemAfterAdd} ITEM(S)`;
             addCartCounter();
@@ -154,10 +181,11 @@ if (localStorageData && productsInCart.length > 0) {
                 productsInCart[j].amount -= 1;
                 localStorage.setItem('addProductsInCart', JSON.stringify(productsInCart));
 
-                document.querySelector(".amount_p").innerText = productsInCart[j].amount;
+                amountProduct[j].innerText = productsInCart[j].amount;
                 let countItemAfterReduce = counterProdcuts(productsInCart);
                 countItems.innerHTML = `${countItemAfterReduce} ITEM(S)`;
                 addCartCounter();
+                totalPayForProducts(productsInCart, totalToPay);
             }
         });
     }
@@ -187,17 +215,19 @@ if (localStorageData && productsInCart.length > 0) {
             if (countItemAfterRemove > 0) {
                 countItems.innerHTML = `${countItemAfterRemove} ITEM(S)`;
                 addCartCounter();
+                totalPayForProducts(productsInCart, totalToPay);
+
             } else {
                 titlePage.style.display = "none";
                 countItems.style.display = "none";
                 containerProducts.style.display = "none";
+                containerPayAction.style.display = "none";
                 addCartCounter();
                 cartEmpty(containerCartPage);
             }
             
         });
-    } 
-
+    }
 
 } else {
     cartEmpty(containerCartPage);
@@ -219,4 +249,15 @@ function cartEmpty(cartContainer) {
     menssage.innerHTML = "Your basket is empty";
     
     cartContainer.appendChild(menssage);
+}
+
+function totalPayForProducts(dataStorage, elementTotalToPay) {
+    let totalPayProducts = 0;
+    dataStorage.forEach(productPrice => {
+        let priceProduct = productPrice.price.slice(0, -3).trim();
+        let totalForProduct = priceProduct * productPrice.amount;
+        totalPayProducts += totalForProduct;
+    });
+
+    elementTotalToPay.innerHTML = `TOTAL ${ totalPayProducts.toFixed(2) } USD`;
 }

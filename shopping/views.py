@@ -153,8 +153,9 @@ def adminSection(request):
                 "formProduct": NewProductsForm()
             })
     else:
-        return HttpResponseRedirect(reverse("index"))       
+        return HttpResponseRedirect(reverse("index")) 
 
+@login_required(login_url='login')
 def cart(request):
 
     if request.user.is_authenticated:    

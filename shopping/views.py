@@ -179,4 +179,29 @@ def add_cart(request, product_id, url_id):
         if not product.in_cart(request.user):
             customer.cart.add(product) 
 
-        return HttpResponseRedirect(reverse("product", args=(url_id,)))    
+        return HttpResponseRedirect(reverse("product", args=(url_id,)))
+
+def search(request):
+    if 'q' in request.GET:
+        if request.GET["q"] != '':
+            name_search = request.GET['q']
+            content_search = Product.objects.filter(title__icontains=name_search)
+            print(content_search)
+            if content_search:
+                return render(request, "shopping/search.html", {
+                    "display_btn_search": True,
+                    "productsFound": content_search,
+                    "name_search": name_search
+                })
+            else:
+                return render(request, "shopping/search.html", {
+                    "display_btn_search": True,
+                    "no_found": "No search results found",
+                    "name_search": name_search
+                })
+        else:
+            return HttpResponseRedirect(reverse("search"))
+    else:
+        return render(request, "shopping/search.html", {
+            "display_btn_search": True
+        })

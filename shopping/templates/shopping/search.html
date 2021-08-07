@@ -1,0 +1,27 @@
+{% extends "shopping/layout.html" %}
+
+{% block body %}
+
+   {% if no_found %}
+        <div class="noFoundProduct">
+            {{ no_found }}
+        </div>
+   {% endif %}
+
+    <section id="productsContainer">
+        {% for product in productsFound %}
+            <a href="{% url 'product' product.id %}">
+                <div class="productContainer">
+                    <img class="img_product" src="{{ product.img_url }}" alt="Zara">
+                    <p class="title_product">{{ product.title|upper }}</p>
+                    <p class="price_product">{{ product.price }} USD</p>
+                </div>
+            </a>    
+        {% endfor %}    
+    </section>
+
+{% endblock %}
+
+{% block script %}
+    {% load static %} <script src="{% static 'shopping/javascript/search.js' %}" async></script>
+{% endblock %}

@@ -15,6 +15,13 @@ body, html {
     overflow-wrap: break-word !important;
 }
 
+/*
+Util para saber com actua el body
+
+main, div, p, a {
+    border: 1px solid red;
+}
+
 /* Side Nav  Start*/
 
 .sidenavshop {

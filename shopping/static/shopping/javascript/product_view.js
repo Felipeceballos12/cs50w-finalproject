@@ -4,6 +4,9 @@ import { addCartCounter } from './util.js';
 let idFound = findIdProduct(productsInCart);
 addBtnProcessOrder(idFound);
 
+/*window.addEventListener("click", (event) => {
+    console.log(event.target);
+});*/
 
 let btnAddProductsToCart = document.getElementsByClassName("btnAddCart");
 let countClicks = 0;

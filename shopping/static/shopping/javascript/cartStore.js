@@ -1,5 +1,8 @@
-import { productsInCart, localStorageData } from './localStorageData.js';
 import { addCartCounter } from './util.js';
+
+let localStorageData = localStorage.getItem("addProductsInCart");
+// if defined then parse stored data or use empty array
+let productsInCart = localStorageData ? JSON.parse(localStorageData) : [];
 
 /*
     - CART PAGE SECTION
@@ -73,7 +76,7 @@ if (localStorageData && productsInCart.length > 0) {
                                 </a>
                             </div>
                             <a class="btnRemove">
-                                <img src="https://img.icons8.com/material-outlined/16/000000/trash--v2.png" alt="trash"/>
+                                <img id="${ productInCart.id }" class="btnDeleteItem" src="https://img.icons8.com/material-outlined/16/000000/trash--v2.png" alt="trash"/>
                             </a>    
                         </div>    
         `;
@@ -83,7 +86,7 @@ if (localStorageData && productsInCart.length > 0) {
         
     });
 
-    // ADD AND REDUCER ITEMS
+    // ADD AND REDUCER ITEMS 
     let amountProduct = document.getElementsByClassName("amount_p");
     let btnAddAmountProduct = document.getElementsByClassName("btnAddProduct");
     for (let x = 0; x < btnAddAmountProduct.length; x++) {
@@ -118,23 +121,20 @@ if (localStorageData && productsInCart.length > 0) {
     }
 
     // DELETE ITEM FROM CART
-    let btnRemove = document.getElementsByClassName("btnRemove");
-    for (let i = 0; i < btnRemove.length; i++) {
-        
-        btnRemove[i].addEventListener("click", function(event) {
-           
-            /*
-                Esta parte es muy importante por que con ella vamos a poder
-                eliminar items del localStorage sin tener que crear una nueva variable
-            */
-            if (i > -1) {
-                productsInCart.splice(i, 1);
-                localStorage.setItem('addProductsInCart', JSON.stringify(productsInCart));
-            }
+    window.addEventListener('click',  (event) => {
+        console.log("Estoy Dentro");
 
+        let productCR = event.target;
+        
+        console.log("Estamos en el id: " + productCR.id);
+
+        if (productCR.className === "btnDeleteItem") {
+            //let productsInStore = productsInCart.filter(product => product.id != productCR.id);
+            productsInCart = productsInCart.filter(product => product.id != productCR.id);
+            localStorage.setItem('addProductsInCart', JSON.stringify(productsInCart));
+            
             // Modificando el cuerpo del cart.html
-            let productClickedRemove = event.target;
-            let productItemRemove = productClickedRemove.parentElement.parentElement.parentElement;
+            let productItemRemove = productCR.parentElement.parentElement.parentElement;
 
             productItemRemove.style.display = "none";
             let countItemAfterRemove = counterProdcuts(productsInCart);
@@ -152,9 +152,57 @@ if (localStorageData && productsInCart.length > 0) {
                 addCartCounter(productsInCart);
                 cartEmpty(containerCartPage);
             }
+        }    
+    });
+    
+    
+    /*let btnRemove = document.getElementsByClassName("btnRemove");
+    //console.log("Antes del Loop ", btnRemove);
+    for (let i = 0; i < btnRemove.length; i++) {
+        
+        btnRemove[i].addEventListener("click", function(event) {
+            //console.log("Dentro del addEventListener ", btnRemove);
+            
+                //Esta parte es muy importante por que con ella vamos a poder
+                //eliminar items del localStorage sin tener que crear una nueva variable
+            
+            //console.log("Este es el item: ", i);
+            if (i > -1) {
+                //console.log("Products in cart Before", JSON.stringify(productsInCart, null, 2));
+                productsInCart.splice(i, 1);
+                //let newProductsInCart = productsInCart.filter( product => product.id != productsInCart[i].id);
+                //console.log(JSON.stringify(newProductsInCart, null, 2));
+                //console.log("Products in cart After", JSON.stringify(productsInCart, null, 2));
+                localStorage.setItem('addProductsInCart', JSON.stringify(productsInCart));
+                
+            }
+
+
+            // Modificando el cuerpo del cart.html
+            let productClickedRemove = event.target;
+            let productItemRemove = productClickedRemove.parentElement.parentElement.parentElement;
+
+            productItemRemove.style.display = "none";
+            let countItemAfterRemove = counterProdcuts(productsInCart);
+
+            //console.log("After Modific the cart.html elements ", btnRemove);
+
+            if (countItemAfterRemove > 0) {
+                countItems.innerHTML = `${countItemAfterRemove} ITEM(S)`;
+                addCartCounter(productsInCart);
+                totalPayForProducts(productsInCart, totalToPay);
+
+            } else {
+                titlePage.style.display = "none";
+                countItems.style.display = "none";
+                containerProducts.style.display = "none";
+                containerPayAction.style.display = "none";
+                addCartCounter(productsInCart);
+                cartEmpty(containerCartPage);
+            }
             
         });
-    }
+    }*/
 
 } else {
     cartEmpty(containerCartPage);

@@ -33,34 +33,19 @@ class Product(models.Model):
     active = models.BooleanField(default=True)
     amount = models.IntegerField()
     img_url = models.CharField(max_length=10000)
-    cart_by = models.ManyToManyField(User, blank=True, related_name="cart")
-
+    
     def __str__(self):
         return f"{self.id} - {self.title}: {self.description}, {self.price}, {self.created_at}, {self.created_by}, {self.category}, {self.gender}, {self.active}, {self.amount}"
-
-    def in_cart(self, user_id):
-        return user_id.cart.filter(pk=self.id).exists()
-
-    def count_cart(self):
-        return self.cart.all().count()        
 
 class Order(models.Model):
     status = models.CharField(max_length=20)
     user_id = models.ForeignKey(User, on_delete=CASCADE, related_name="CustomerOrders")
     address = models.CharField(max_length=1000)
+    products = models.ManyToManyField(Product, related_name="products_buy")
     amount_pay = models.DecimalField(decimal_places=2, max_digits=40)
     created_at = models.DateField(auto_now_add=True)
     
     def __str__(self):
-        return f"{self.id}: {self.user_id}, {self.status}, {self.address}, {self.amount_pay}, {self.created_at}"
-
-class OrderDetails(models.Model):
-    product_id = models.ForeignKey(Product, on_delete=CASCADE, related_name="Orders")
-    order_id = models.ForeignKey(Order, on_delete=CASCADE, related_name="ProductOrders")
-    amount = models.IntegerField()
-
-    def __str__(self):
-        return f"{self.id} - {self.order_id} : {self.product_id}, {self.amount}"
-
+        return f"{self.id}: {self.user_id}, {self.status}, {self.address}, {self.products},{self.amount_pay}, {self.created_at}"
 
     

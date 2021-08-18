@@ -1,4 +1,6 @@
+import json
 from django.db.models.aggregates import Count
+from django.http.response import JsonResponse
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 
@@ -6,7 +8,7 @@ from django.contrib.auth import authenticate, get_permission_codename, login, lo
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
 from django.contrib import messages
-from .models import User, Product, Category
+from .models import Order, User, Product, Category
 from django.db import IntegrityError
 from django import forms
 from django.contrib.auth.decorators import login_required
@@ -100,17 +102,10 @@ def product(request, product_id):
 
     product = Product.objects.get(id=product_id)
     other_products = Product.objects.filter(gender=product.gender)[0:2]
-
-    if request.user.is_authenticated:
-        in_cart_product = product.in_cart(request.user)
-    else:
-        in_cart_product = False
-   
+    
     return render(request, "shopping/view_product.html", {
         "product": product,
         "other_products": other_products,
-        "in_cart_product": in_cart_product,
-        "isProduct": False
     })
 
 class NewProductsForm(forms.Form):
@@ -157,29 +152,8 @@ def adminSection(request):
 
 @login_required(login_url='login')
 def cart(request):
-
-    if request.user.is_authenticated:    
-        products = request.user.cart.all()
-    else:
-        products = False
-
-    return render(request, "shopping/cart.html", {
-        "product_carts": products
-    })
+    return render(request, "shopping/cart.html")
     
-
-@login_required(login_url='register')
-def add_cart(request, product_id, url_id):
-    
-    if request.method == "POST":
-
-        product = Product.objects.get(id=product_id)
-        customer = User.objects.get(username=request.user)
-
-        if not product.in_cart(request.user):
-            customer.cart.add(product) 
-
-        return HttpResponseRedirect(reverse("product", args=(url_id,)))
 
 def search(request):
     if 'q' in request.GET:
@@ -205,3 +179,45 @@ def search(request):
         return render(request, "shopping/search.html", {
             "display_btn_search": True
         })
+
+@csrf_exempt
+@login_required
+def order(request):
+    
+    if request.method != "POST":
+        return JsonResponse({"error": "POST request required."}, status=400)
+
+    data_received = json.loads(request.body)
+    products = [product.strip() for product in data_received.get("products").split(",")]
+    if products == [""]:
+        return JsonResponse({
+            "error": "At least one product required."
+        }, status=400)
+    
+    status = data_received.get("status", "")
+    amount_to_pay = data_received.get("amount_pay", "")
+    user = User.objects.get(email=request.user)
+    addres_user = user.address
+
+    order = Order(
+        status=status,
+        user_id=request.user,
+        address=addres_user,
+        amount_pay=amount_to_pay
+    )
+
+    order.save()
+    for product in products:
+        order.products.add(product)
+    order.save()
+
+
+    return JsonResponse({"menssage": "Hemos recibido el objecto"}, status=201)
+
+@login_required(login_url='login')
+def orderDetails(request):
+
+    orderDetails = Order.objects.filter(user_id=request.user).last()
+    print(orderDetails.products)
+
+    return render(request, "shopping/order.html")

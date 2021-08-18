@@ -22,17 +22,17 @@ if (localStorageData && productsInCart.length > 0) {
     let countItems = document.createElement('p');
     let containerProducts = document.createElement('div');
     let containerPayAction = document.createElement('div');
-    let btnPayAction = document.createElement('a');
+    let btnPayAction = document.createElement('input');
     let subContainerOfTotal = document.createElement('div');
     let totalToPay = document.createElement('h5');
+    let orderForm = document.createElement('form');
 
-    
     
     // Agregando los datos a los elementos
     titlePage.innerHTML = "SHOPPING BAG";
     countItems.innerHTML = `${countProducts} ITEM(S)`;
-    btnPayAction.innerHTML = "CONTINUE";
-    btnPayAction.href = "#";
+    btnPayAction.value = "READY TO PAY";
+    btnPayAction.type = "submit";
     totalPayForProducts(productsInCart, totalToPay);
 
 
@@ -42,6 +42,7 @@ if (localStorageData && productsInCart.length > 0) {
     containerPayAction.className = "containerPayAction";
     subContainerOfTotal.className = "subContainerOfTotal";
     btnPayAction.className = "btnPayAction";
+    orderForm.id = "orderForm";
     
     
     // Agregando elementos a su padre containerCartPage
@@ -52,7 +53,8 @@ if (localStorageData && productsInCart.length > 0) {
 
     // Agregando elementos a su padre containerPayAction
     containerPayAction.appendChild(subContainerOfTotal);
-    containerPayAction.appendChild(btnPayAction);
+    containerPayAction.appendChild(orderForm);
+    orderForm.appendChild(btnPayAction);
     subContainerOfTotal.appendChild(totalToPay);
 
     // Recorriendo un Loop para mostrar los productos agregados al cart
@@ -97,7 +99,6 @@ if (localStorageData && productsInCart.length > 0) {
             totalPayForProducts(productsInCart, totalToPay);
             
             amountProduct[x].innerText = productsInCart[x].amount;
-            console.log(amountProduct[x]);
             let countItemAfterAdd = counterProdcuts(productsInCart);
             countItems.innerHTML = `${countItemAfterAdd} ITEM(S)`;
             addCartCounter(productsInCart);
@@ -122,12 +123,8 @@ if (localStorageData && productsInCart.length > 0) {
 
     // DELETE ITEM FROM CART
     window.addEventListener('click',  (event) => {
-        console.log("Estoy Dentro");
-
         let productCR = event.target;
         
-        console.log("Estamos en el id: " + productCR.id);
-
         if (productCR.className === "btnDeleteItem") {
             //let productsInStore = productsInCart.filter(product => product.id != productCR.id);
             productsInCart = productsInCart.filter(product => product.id != productCR.id);
@@ -143,7 +140,6 @@ if (localStorageData && productsInCart.length > 0) {
                 countItems.innerHTML = `${countItemAfterRemove} ITEM(S)`;
                 addCartCounter(productsInCart);
                 totalPayForProducts(productsInCart, totalToPay);
-
             } else {
                 titlePage.style.display = "none";
                 countItems.style.display = "none";
@@ -152,9 +148,43 @@ if (localStorageData && productsInCart.length > 0) {
                 addCartCounter(productsInCart);
                 cartEmpty(containerCartPage);
             }
+
+            
         }    
     });
-    
+
+    document.querySelector("#orderForm").onsubmit = async function (e) {
+        e.preventDefault();
+
+        let idsProducts = [];
+        let amountToPay = 0;
+
+        productsInCart.forEach(product => {
+            idsProducts.push(product.id);
+            let priceProduct = product.price.slice(0, -3).trim();
+            let totalForProduct = priceProduct * product.amount;
+            amountToPay += totalForProduct;
+        });
+
+        const response = await fetch('/order', {
+            method: 'POST',
+            body: JSON.stringify({
+                status: "En Proceso",
+                products: idsProducts.toString(),
+                amount_pay: amountToPay.toFixed(2)
+            })
+        });
+
+        const dataResponse = await response.json();
+        if (dataResponse.menssage) {
+            localStorage.removeItem("addProductsInCart");
+            window.location.href = "http://127.0.0.1:8000/orderDetails";
+        } else {
+            console.log("Shit");
+        }
+
+    }
+
     
     /*let btnRemove = document.getElementsByClassName("btnRemove");
     //console.log("Antes del Loop ", btnRemove);
@@ -228,6 +258,7 @@ function cartEmpty(cartContainer) {
 
 function totalPayForProducts(dataStorage, elementTotalToPay) {
     let totalPayProducts = 0;
+    
     dataStorage.forEach(productPrice => {
         let priceProduct = productPrice.price.slice(0, -3).trim();
         let totalForProduct = priceProduct * productPrice.amount;

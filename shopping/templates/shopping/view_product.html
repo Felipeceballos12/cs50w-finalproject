@@ -4,11 +4,11 @@
 
     <main id="mainProductSolo">
         <div id="containerProductSolo">
-            <input type="hidden" class="product_items" id="{{ product.id }}">
+            <input type="hidden" class="product_items" id="{{ product.id }}-{{ product.amount }}">
             <img class="productSolo img_p" src="{{ product.img_url }}" alt="Zara">
             <div class="containerDescriptionProduct">
                 <h3 class="title_p">{{ product.title|upper }}</h3>
-                <p>{{ product.description }}</p>
+                <p class="descriptionProduct">{{ product.description }}</p>
                 <p id="priceProductSolo" class="price_p">{{ product.price }} USD</p>
                 {% if user.is_authenticated %}
                     <a id="btnCart" class="btnAddCart">Add to basket</a>
@@ -24,7 +24,7 @@
         <div id="otherProductsContainer">
             {% for other_product in other_products %}
                 <div class="productItem">
-                    <a href="{% url 'product' other_product.id %}" class="product_items" id="{{ other_product.id }}">
+                    <a href="{% url 'product' other_product.id %}" class="product_items" id="{{ other_product.id }}-{{ other_product.amount }}">
                         <div>
                             <img class="img_otherProduct img_p" src="{{ other_product.img_url }}" alt="Zara">
                             <p class="title_product title_p">{{ other_product.title|upper }}</p>

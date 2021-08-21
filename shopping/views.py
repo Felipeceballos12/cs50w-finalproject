@@ -188,6 +188,7 @@ def order(request):
         return JsonResponse({"error": "POST request required."}, status=400)
 
     data_received = json.loads(request.body)
+    print(data_received)
     products = [product.strip() for product in data_received.get("products").split(",")]
     if products == [""]:
         return JsonResponse({
@@ -212,12 +213,17 @@ def order(request):
     order.save()
 
 
-    return JsonResponse({"menssage": "Hemos recibido el objecto"}, status=201)
+    return JsonResponse({"message": "Hemos recibido el objecto"}, status=201)
 
 @login_required(login_url='login')
 def orderDetails(request):
 
     orderDetails = Order.objects.filter(user_id=request.user).last()
-    print(orderDetails.products)
+    
+    return render(request, "shopping/order.html", {
+        "orderDetails": orderDetails
+    })
 
-    return render(request, "shopping/order.html")
+
+def profile(request):
+    return render(request, "shopping/profile.html")

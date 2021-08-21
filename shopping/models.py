@@ -46,6 +46,5 @@ class Order(models.Model):
     created_at = models.DateField(auto_now_add=True)
     
     def __str__(self):
-        return f"{self.id}: {self.user_id}, {self.status}, {self.address}, {self.products},{self.amount_pay}, {self.created_at}"
-
-    
+        #products_array = [product for product in self.products.all()]
+        return f"{self.id}: {self.user_id}, {self.status}, {self.address}, {self.products}, {self.amount_pay}, {self.created_at}"

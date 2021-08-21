@@ -10,7 +10,7 @@ let productsInCart = localStorageData ? JSON.parse(localStorageData) : [];
     NOTA: Esta seccion deberia estar separada de store?
 */
 
-addCartCounter(productsInCart);
+addCartCounter(productsInCart, localStorageData);
 
 let containerCartPage = document.getElementById("cartContainer");
 
@@ -26,12 +26,12 @@ if (localStorageData && productsInCart.length > 0) {
     let subContainerOfTotal = document.createElement('div');
     let totalToPay = document.createElement('h5');
     let orderForm = document.createElement('form');
-
+    let subContainerPayAction = document.createElement('div');
     
     // Agregando los datos a los elementos
     titlePage.innerHTML = "SHOPPING BAG";
     countItems.innerHTML = `${countProducts} ITEM(S)`;
-    btnPayAction.value = "READY TO PAY";
+    btnPayAction.value = "BUY NOW";
     btnPayAction.type = "submit";
     totalPayForProducts(productsInCart, totalToPay);
 
@@ -43,6 +43,7 @@ if (localStorageData && productsInCart.length > 0) {
     subContainerOfTotal.className = "subContainerOfTotal";
     btnPayAction.className = "btnPayAction";
     orderForm.id = "orderForm";
+    subContainerPayAction.className = "subContainerPayAction"
     
     
     // Agregando elementos a su padre containerCartPage
@@ -52,8 +53,9 @@ if (localStorageData && productsInCart.length > 0) {
     containerCartPage.appendChild(containerPayAction);
 
     // Agregando elementos a su padre containerPayAction
-    containerPayAction.appendChild(subContainerOfTotal);
-    containerPayAction.appendChild(orderForm);
+    containerPayAction.appendChild(subContainerPayAction);
+    subContainerPayAction.appendChild(subContainerOfTotal);
+    subContainerPayAction.appendChild(orderForm);
     orderForm.appendChild(btnPayAction);
     subContainerOfTotal.appendChild(totalToPay);
 
@@ -93,15 +95,17 @@ if (localStorageData && productsInCart.length > 0) {
     let btnAddAmountProduct = document.getElementsByClassName("btnAddProduct");
     for (let x = 0; x < btnAddAmountProduct.length; x++) {
         btnAddAmountProduct[x].addEventListener('click', () => {
-            productsInCart[x].amount += 1;
-            localStorage.setItem('addProductsInCart', JSON.stringify(productsInCart));
+            if (productsInCart[x].amount < productsInCart[x].amountTotalOfProduct) {
+                productsInCart[x].amount += 1;
+                localStorage.setItem('addProductsInCart', JSON.stringify(productsInCart));
 
-            totalPayForProducts(productsInCart, totalToPay);
-            
-            amountProduct[x].innerText = productsInCart[x].amount;
-            let countItemAfterAdd = counterProdcuts(productsInCart);
-            countItems.innerHTML = `${countItemAfterAdd} ITEM(S)`;
-            addCartCounter(productsInCart);
+                totalPayForProducts(productsInCart, totalToPay);
+                
+                amountProduct[x].innerText = productsInCart[x].amount;
+                let countItemAfterAdd = counterProdcuts(productsInCart);
+                countItems.innerHTML = `${countItemAfterAdd} ITEM(S)`;
+                addCartCounter(productsInCart, localStorageData);
+            }    
         });
     }
 
@@ -115,7 +119,7 @@ if (localStorageData && productsInCart.length > 0) {
                 amountProduct[j].innerText = productsInCart[j].amount;
                 let countItemAfterReduce = counterProdcuts(productsInCart);
                 countItems.innerHTML = `${countItemAfterReduce} ITEM(S)`;
-                addCartCounter(productsInCart);
+                addCartCounter(productsInCart, localStorageData);
                 totalPayForProducts(productsInCart, totalToPay);
             }
         });
@@ -138,15 +142,17 @@ if (localStorageData && productsInCart.length > 0) {
 
             if (countItemAfterRemove > 0) {
                 countItems.innerHTML = `${countItemAfterRemove} ITEM(S)`;
-                addCartCounter(productsInCart);
+                addCartCounter(productsInCart, localStorageData);
                 totalPayForProducts(productsInCart, totalToPay);
             } else {
                 titlePage.style.display = "none";
                 countItems.style.display = "none";
                 containerProducts.style.display = "none";
                 containerPayAction.style.display = "none";
-                addCartCounter(productsInCart);
+                localStorage.removeItem("addProductsInCart");
+                addCartCounter(productsInCart, localStorageData);
                 cartEmpty(containerCartPage);
+                
             }
 
             
@@ -166,73 +172,27 @@ if (localStorageData && productsInCart.length > 0) {
             amountToPay += totalForProduct;
         });
 
+        let ids = idsProducts.toString();
+
         const response = await fetch('/order', {
             method: 'POST',
             body: JSON.stringify({
                 status: "En Proceso",
-                products: idsProducts.toString(),
+                products: ids,
                 amount_pay: amountToPay.toFixed(2)
             })
         });
 
         const dataResponse = await response.json();
-        if (dataResponse.menssage) {
+
+        if (dataResponse.message) {
             localStorage.removeItem("addProductsInCart");
-            window.location.href = "http://127.0.0.1:8000/orderDetails";
+            window.location.href = "/orderDetails";
         } else {
-            console.log("Shit");
+            console.log(dataResponse.error);
         }
 
     }
-
-    
-    /*let btnRemove = document.getElementsByClassName("btnRemove");
-    //console.log("Antes del Loop ", btnRemove);
-    for (let i = 0; i < btnRemove.length; i++) {
-        
-        btnRemove[i].addEventListener("click", function(event) {
-            //console.log("Dentro del addEventListener ", btnRemove);
-            
-                //Esta parte es muy importante por que con ella vamos a poder
-                //eliminar items del localStorage sin tener que crear una nueva variable
-            
-            //console.log("Este es el item: ", i);
-            if (i > -1) {
-                //console.log("Products in cart Before", JSON.stringify(productsInCart, null, 2));
-                productsInCart.splice(i, 1);
-                //let newProductsInCart = productsInCart.filter( product => product.id != productsInCart[i].id);
-                //console.log(JSON.stringify(newProductsInCart, null, 2));
-                //console.log("Products in cart After", JSON.stringify(productsInCart, null, 2));
-                localStorage.setItem('addProductsInCart', JSON.stringify(productsInCart));
-                
-            }
-
-
-            // Modificando el cuerpo del cart.html
-            let productClickedRemove = event.target;
-            let productItemRemove = productClickedRemove.parentElement.parentElement.parentElement;
-
-            productItemRemove.style.display = "none";
-            let countItemAfterRemove = counterProdcuts(productsInCart);
-
-            //console.log("After Modific the cart.html elements ", btnRemove);
-
-            if (countItemAfterRemove > 0) {
-                countItems.innerHTML = `${countItemAfterRemove} ITEM(S)`;
-                addCartCounter(productsInCart);
-                totalPayForProducts(productsInCart, totalToPay);
-
-            } else {
-                titlePage.style.display = "none";
-                countItems.style.display = "none";
-                containerProducts.style.display = "none";
-                containerPayAction.style.display = "none";
-                addCartCounter(productsInCart);
-                cartEmpty(containerCartPage);
-            }
-            
-        });
-    }*/
 
 } else {
     cartEmpty(containerCartPage);

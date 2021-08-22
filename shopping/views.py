@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, get_permission_codename, login, lo
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
 from django.contrib import messages
-from .models import Order, User, Product, Category
+from .models import Order, User, Product, Category, OrderDetails
 from django.db import IntegrityError
 from django import forms
 from django.contrib.auth.decorators import login_required
@@ -190,7 +190,8 @@ def order(request):
     data_received = json.loads(request.body)
     print(data_received)
     products = [product.strip() for product in data_received.get("products").split(",")]
-    if products == [""]:
+    amount_products = [amount.strip() for amount in data_received.get("amount_products").split(",")]
+    if products == [""] and amount_products == [""]:
         return JsonResponse({
             "error": "At least one product required."
         }, status=400)
@@ -206,22 +207,35 @@ def order(request):
         address=addres_user,
         amount_pay=amount_to_pay
     )
-
+    
     order.save()
-    for product in products:
-        order.products.add(product)
-    order.save()
+    
+    for x in range(0, len(products)):
+        
+        # Update amount of products
+        product = Product.objects.get(pk=products[x])
+        product.amount -= int(amount_products[x])
+        product.save()
 
+        order_details = OrderDetails(
+           order_id = Order.objects.get(pk=order.id),
+           product_id = Product.objects.get(pk=product.id),
+           amount_products = amount_products[x]
+        )
+
+        order_details.save()    
 
     return JsonResponse({"message": "Hemos recibido el objecto"}, status=201)
 
 @login_required(login_url='login')
 def orderDetails(request):
 
-    orderDetails = Order.objects.filter(user_id=request.user).last()
+    order = Order.objects.filter(user_id=request.user).last()
+    order_details = OrderDetails.objects.filter(order_id=order.id)
     
     return render(request, "shopping/order.html", {
-        "orderDetails": orderDetails
+        "order": order,
+        "orderDetails": order_details,
     })
 
 

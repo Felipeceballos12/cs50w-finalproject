@@ -164,22 +164,23 @@ if (localStorageData && productsInCart.length > 0) {
 
         let idsProducts = [];
         let amountToPay = 0;
+        let amountProduct = [];
 
         productsInCart.forEach(product => {
             idsProducts.push(product.id);
             let priceProduct = product.price.slice(0, -3).trim();
             let totalForProduct = priceProduct * product.amount;
-            amountToPay += totalForProduct;
+            amountProduct.push(product.amount);
+            amountToPay = totalForProduct;
         });
-
-        let ids = idsProducts.toString();
 
         const response = await fetch('/order', {
             method: 'POST',
             body: JSON.stringify({
-                status: "En Proceso",
-                products: ids,
-                amount_pay: amountToPay.toFixed(2)
+                status: "In Process",
+                products: idsProducts.toString(),
+                amount_pay: amountToPay.toFixed(2),
+                amount_products: amountProduct.toString(),
             })
         });
 

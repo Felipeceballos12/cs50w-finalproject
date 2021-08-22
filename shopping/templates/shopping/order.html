@@ -7,25 +7,25 @@
             <h1 class="titleOrder">SHIPPING</h1>
             <div class="descriptionOrder">
                 <div class="subDescriptionOrder1">
-                    <h3 class="subTitleOrder">NUM ORDER: #{{ orderDetails.id }}</h3>
-                    <p class="textinfo"><span>Date Of Payment:  </span> {{ orderDetails.created_at }}</p>
-                    <p class="textinfo" style="padding-bottom: 1rem;"><span>Status: </span>{{ orderDetails.status }}</p>
+                    <h3 class="subTitleOrder">NUM ORDER: #{{ order.id }}</h3>
+                    <p class="textinfo"><span>Date Of Payment:  </span>{{ order.created_at }}</p>
+                    <p class="textinfo" style="padding-bottom: 1rem;"><span>Status: </span>{{ order.status }}</p>
                 </div>
                 <div>
                     <h3 class="subTitleOrder">YOUR DETAILS:</h3>
-                    <p class="textinfo"><span>Name:  </span>{{ orderDetails.user_id }}</p>
-                    <p class="textinfo"><span>Address:  </span>{{ orderDetails.address }}</p>
+                    <p class="textinfo"><span>Name:  </span>{{ order.user_id }}</p>
+                    <p class="textinfo"><span>Address:  </span>{{ order.address }}</p>
                 </div>
             </div>    
-            <h3 style="padding-top: 1rem;">TOTAL:  ${{ orderDetails.amount_pay }}</h3>
+            <h3 style="padding-top: 1rem;">TOTAL:  ${{ order.amount_pay }}</h3>
         </div>
         <div class="subContainerOrder2">
             <h1 class="titleOrder">DELIVERY</h1>
             <div class="containerOrderImages">
-                {% for product in orderDetails.products.all %}
+                {% for order_product in orderDetails %}
                     <div class="subContainerOrderImages">    
-                        <p class="numberOfItemsBought">1 Item(s)</p>
-                        <img src="{{ product.img_url }}" alt="{{ product.title }}" class="imgsOrder">
+                        <p class="numberOfItemsBought">{{ order_product.amount_products }} Item(s)</p>
+                        <img src="{{ order_product.product_id.img_url }}" alt="{{ order_product.product_id.title }}" class="imgsOrder">
                     </div>
                 {% endfor %}
             </div>    

@@ -41,10 +41,17 @@ class Order(models.Model):
     status = models.CharField(max_length=20)
     user_id = models.ForeignKey(User, on_delete=CASCADE, related_name="CustomerOrders")
     address = models.CharField(max_length=1000)
-    products = models.ManyToManyField(Product, related_name="products_buy")
     amount_pay = models.DecimalField(decimal_places=2, max_digits=40)
     created_at = models.DateField(auto_now_add=True)
     
     def __str__(self):
         #products_array = [product for product in self.products.all()]
-        return f"{self.id}: {self.user_id}, {self.status}, {self.address}, {self.products}, {self.amount_pay}, {self.created_at}"
+        return f"{self.id}: {self.user_id}, {self.status}, {self.address}, {self.amount_pay}, {self.created_at}"
+
+class OrderDetails(models.Model):
+    order_id = models.ForeignKey(Order, on_delete=CASCADE, related_name="order_made")
+    product_id = models.ForeignKey(Product, on_delete=CASCADE, related_name="product_bought")
+    amount_products = models.IntegerField()
+
+    def __str__(self):
+        return f"{self.id}: {self.order_id}, {self.product_id}, {self.amount_products}"

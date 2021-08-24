@@ -238,6 +238,49 @@ def orderDetails(request):
         "orderDetails": order_details,
     })
 
-
+@login_required(login_url="login")
 def profile(request):
     return render(request, "shopping/profile.html")
+
+
+"""@login_required(login_url="login")
+def userbox(request, userbox):
+
+    if userbox == "bill":
+        
+        orders = Order.objects.filter(
+            user_id=request.user
+        )
+
+        orders_list = [order.serialize() for order in orders]
+        bills_list = []
+        for order in orders_list:
+            bills_list.append(OrderDetails.objects.filter(
+                order_id=order["id"]
+            ))
+        
+        bill_list_serialize = []
+        for bill_list in bills_list:
+            for bill in bill_list:
+                bill_list_serialize.append(bill.serialize())
+
+        return JsonResponse(bill_list_serialize, safe=False)
+
+    elif userbox == "personal_info":
+        
+        users = User.objects.filter(
+            username=request.user
+        )
+       
+        return JsonResponse([user.serialize() for user in users], safe=False)
+
+    else:
+        return JsonResponse({"error": "Invalid userbox."}, status=400)"""
+
+
+@login_required(login_url="login")
+def personal_info(request):
+    return render(request, "shopping/personal_details.html")
+
+def invoice(request):
+    return "Invoice"

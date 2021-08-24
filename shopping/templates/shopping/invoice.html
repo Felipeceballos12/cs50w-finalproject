@@ -1,0 +1,18 @@
+{% extends "shopping/layout.html" %}
+
+{% block body %}
+
+    <main class="containerPersonalInfo">
+        <nav class="containerInfoPersonal">
+            <a class="personalInfoLinks" id="bill">INVOICE</a>
+            <a class="personalInfoLinks" id="personal_info" href="{% url 'personal_info' %}">PERSONAL DETAILS</a>
+            <a class="personalInfoLinks" href="{% url 'logout' %}">LOG OUT</a>
+        </nav>
+        <div id="personalInfo">
+            <h1 class="titleInfoUser">INVOICE</h1>
+            <div class="containerInfoUser">
+                
+            </div>
+        </div>
+    </main>
+{% endblock %}

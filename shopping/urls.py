@@ -13,5 +13,8 @@ urlpatterns = [
     path("search", views.search, name="search"),
     path("order", views.order, name="order"),
     path("orderDetails", views.orderDetails, name="orderDetails"),
-    path("user/menu", views.profile, name="profile")
+    path("user/menu", views.profile, name="profile"),
+    #path("user/<str:userbox>", views.userbox, name="userbox"),
+    path("user/personal-info", views.personal_info, name="personal_info"),
+    path("user/invoice", views.invoice, name="invoice")
 ]

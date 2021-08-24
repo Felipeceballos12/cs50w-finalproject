@@ -1113,26 +1113,152 @@ footer {
 
 /* END ORDER HTML */
 
-/* PERSONAL INFO START */
+/* PROFILE START */
 
-.containerInfoPersonal {
-    width: 280px;
+.containerProfile {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.containerInfoPersonal, .subcontainerProfile {
+    width: 280px;
+    position: sticky;
+    top: 112px;
     margin-left: 1.37rem;
     margin-top: 2rem;
 }
 
-.containerInfoPersonal a {
+.profileLinks {
+    display: block;
     text-decoration: none;
-    font-size: 1.2rem;
-    font-weight: 600;
+    font-size: 1.275rem;
+    font-weight: 700;
     color: #000;
     cursor: pointer;
 }
 
-
-.containerInfoPersonal:hover  a:hover{
-    color: #333;
+.subcontainerProfile:hover .profileLinks {
+    color: #e5e5e5;
 }
+
+.profileLinks:hover {
+    color: #000 !important;
+}
+
+.profileLinks:nth-last-child(1) {
+    padding-top: 1rem;
+}
+
+/* PROFILE END */
+
+/* PERSONAL INFO START */
+
+.containerPersonalInfo {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.personalInfoLinks {
+    display: block;
+    text-decoration: none;
+    color: #e5e5e5;
+    font-size: 1.275rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.containerInfoPersonal:hover .personalInfoLinks:hover {
+    color: #000 !important;
+}
+
+.personalInfoLinks:nth-last-child(2) {
+    padding-left: 1rem;
+    color: #000;
+}
+
+.personalInfoLinks:nth-last-child(1) {
+    padding-top: 1rem;
+}
+
+#personalInfo {
+    width: 45%;
+    margin: 1.6rem 1.37rem 8rem 4rem;
+}
+
+.containerInfoUser {
+    margin-top: 2rem;
+}
+
+.titleInfoUser {
+    font-size: 1.375rem;
+}
+
+.messageInfo {
+    padding-top: 1rem;
+    font-size: 0.713rem;
+    font-weight: 600;
+}
+
+.subContainerInfouser {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.containerInputandLabel {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.containerInputandLabel label {
+    font-size: 0.675rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #666;
+}
+
+.containerInputandLabel input {
+    width: 100%;
+    outline: none;
+    border-top: none;
+    border-right: none;
+    border-bottom: 1px solid #000;
+    border-left: none;
+    padding: 0.2rem 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-right: 1rem;
+}
+
+.containerInputandLabel input::placeholder {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.btnUpdatePersonalDetails {
+    width: 230px;
+    padding: 0.7rem 0.5rem;
+    background-color: #000;
+    color: #F3F3F3;
+    font-size: 0.7rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    margin-top: 2rem; 
+}
+
+@media screen and (max-width : 875px) {
+
+    .containerInfoPersonal {
+        display: none;
+    }
+
+    #personalInfo {
+        width: 100%;
+        margin: 2rem 1.37rem 8rem;
+    }
+
+}
+
 /* END PERSONAL INFO */

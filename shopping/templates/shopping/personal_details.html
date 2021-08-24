@@ -1,0 +1,65 @@
+{% extends "shopping/layout.html" %}
+
+{% block body %}
+
+    <main class="containerPersonalInfo">
+        <nav class="containerInfoPersonal">
+            <a class="personalInfoLinks" id="bill">INVOICE</a>
+            <a class="personalInfoLinks" id="personal_info" href="{% url 'personal_info' %}">PERSONAL DETAILS</a>
+            <a class="personalInfoLinks" href="{% url 'logout' %}">LOG OUT</a>
+        </nav>
+        <div id="personalInfo">
+            <h1 class="titleInfoUser">PERSONAL DETAILS</h1>
+            <p class="messageInfo">
+                ACCESS AND MODIFY YOUR PERSONAL DETAILS (EMAIL, BILLING ADDRESS, PHONE NUMBER, ETC.) 
+                FOR FUTURE PURCHASES AND TO NOTIFY US OF CHANGES IN YOUR CONTACT INFORMATION.
+            </p>
+            <div class="containerInfoUser">
+                <form> 
+                    {% csrf_token %}                   
+                    <div class="subContainerInfouser">
+                        <div class="containerInputandLabel">
+                            <label>First Name:</label>
+                            <input name="firstName" type="text" value="{{ user.first_name }}" required/>
+                        </div>
+                        <div class="containerInputandLabel">
+                            <label>Last Name:</label>
+                            <input name="lastName" type="text" value="{{ user.last_name }}" required/>
+                        </div>
+                    </div>
+                    <div class="subContainerInfouser">
+                        <div class="containerInputandLabel"> 
+                            <label>Email:</label>
+                            <input name="email" type="email" value="{{ user.email }}" required/>
+                        </div>
+                        <div class="containerInputandLabel">
+                            <label>Cedula:</label>
+                            <input name="cedula" type="text" value="{{ user.cedula }}" required/>
+                        </div>
+                    </div>
+                    <div class="subContainerInfouser">
+                        <div class="containerInputandLabel">
+                            <label>Address:</label>
+                            <input name="address" type="address" value="{{ user.address }}" required/>
+                        </div>
+                        <div class="containerInputandLabel">
+                            <label>Phone Number:</label>
+                            <input name="phoneNumber" type="number" value="{{ user.phone_number }}" required/>
+                        </div>
+                    </div>
+                    <div class="subContainerInfouser">
+                        <div class="containerInputandLabel">
+                            <label>City:</label>
+                            <input name="city" type="text" value="{{ user.city }}" required/>
+                        </div>
+                        <div class="containerInputandLabel">
+                            <label>Country:</label>
+                            <input name="country" type="text" value="{{ user.country }}" required/>
+                        </div>
+                    </div>
+                    <button class="btnUpdatePersonalDetails" type="submit">UPDATE PERSONAL DETAILS</button>
+                </form>
+            </div>
+        </div>
+    </main>
+{% endblock %}

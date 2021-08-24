@@ -26,7 +26,7 @@ def login_view(request):
         email = request.POST["email"]
         password = request.POST["password"]
         user = authenticate(request, username=email, password=password)
-        print(user)
+        
         # Check if authenticate successful
         if user is not None:
             login(request, user)
@@ -282,5 +282,34 @@ def userbox(request, userbox):
 def personal_info(request):
     return render(request, "shopping/personal_details.html")
 
+def update_personal_info(request):
+
+    if request.method == "POST":
+
+        email = request.POST["email"]
+        first_name = request.POST["first_name"]
+        last_name = request.POST["last_name"]
+        cedula = request.POST["cedula"]
+        phone_number = request.POST["phone_number"]
+        address = request.POST["address"]
+        city = request.POST["city"]
+        country = request.POST["country"]
+
+        user_info = User.objects.get(username=request.user)
+        
+        user_info.username = email
+        user_info.email = email
+        user_info.first_name = first_name
+        user_info.last_name = last_name
+        user_info.cedula = cedula
+        user_info.phone_number = phone_number
+        user_info.address = address
+        user_info.city = city
+        user_info.country = country
+
+        user_info.save()
+    
+    return HttpResponseRedirect(reverse("personal_info"))
+
 def invoice(request):
-    return "Invoice"
+    return render(request, "shopping/invoice.html")

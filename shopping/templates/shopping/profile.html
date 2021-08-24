@@ -4,7 +4,7 @@
 
     <main class="containerProfile">
         <nav class="subcontainerProfile">
-            <a class="profileLinks" id="bill">INVOICE</a>
+            <a class="profileLinks" id="bill" href="{% url 'invoice' %}">INVOICE</a>
             <a class="profileLinks" id="personal_info" href="{% url 'personal_info' %}">PERSONAL DETAILS</a>
             <a class="profileLinks" href="{% url 'logout' %}">LOG OUT</a>
         </nav>

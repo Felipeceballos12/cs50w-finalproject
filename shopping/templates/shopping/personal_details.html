@@ -4,7 +4,7 @@
 
     <main class="containerPersonalInfo">
         <nav class="containerInfoPersonal">
-            <a class="personalInfoLinks" id="bill">INVOICE</a>
+            <a class="personalInfoLinks" id="bill"  href="{% url 'invoice' %}">INVOICE</a>
             <a class="personalInfoLinks" id="personal_info" href="{% url 'personal_info' %}">PERSONAL DETAILS</a>
             <a class="personalInfoLinks" href="{% url 'logout' %}">LOG OUT</a>
         </nav>
@@ -15,16 +15,16 @@
                 FOR FUTURE PURCHASES AND TO NOTIFY US OF CHANGES IN YOUR CONTACT INFORMATION.
             </p>
             <div class="containerInfoUser">
-                <form> 
+                <form action="{% url 'update_personal_info' %}" method="POST"> 
                     {% csrf_token %}                   
                     <div class="subContainerInfouser">
                         <div class="containerInputandLabel">
                             <label>First Name:</label>
-                            <input name="firstName" type="text" value="{{ user.first_name }}" required/>
+                            <input name="first_name" type="text" value="{{ user.first_name }}" required/>
                         </div>
                         <div class="containerInputandLabel">
                             <label>Last Name:</label>
-                            <input name="lastName" type="text" value="{{ user.last_name }}" required/>
+                            <input name="last_name" type="text" value="{{ user.last_name }}" required/>
                         </div>
                     </div>
                     <div class="subContainerInfouser">
@@ -44,7 +44,7 @@
                         </div>
                         <div class="containerInputandLabel">
                             <label>Phone Number:</label>
-                            <input name="phoneNumber" type="number" value="{{ user.phone_number }}" required/>
+                            <input name="phone_number" type="number" value="{{ user.phone_number }}" required/>
                         </div>
                     </div>
                     <div class="subContainerInfouser">

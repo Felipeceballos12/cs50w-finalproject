@@ -16,5 +16,6 @@ urlpatterns = [
     path("user/menu", views.profile, name="profile"),
     #path("user/<str:userbox>", views.userbox, name="userbox"),
     path("user/personal-info", views.personal_info, name="personal_info"),
+    path("user/update-personal-info", views.update_personal_info, name="update_personal_info"),
     path("user/invoice", views.invoice, name="invoice")
 ]

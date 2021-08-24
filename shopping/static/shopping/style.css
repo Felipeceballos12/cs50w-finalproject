@@ -1158,7 +1158,7 @@ footer {
     flex-wrap: wrap;
 }
 
-.personalInfoLinks {
+.personalInfoLinks, .invoiceLinks {
     display: block;
     text-decoration: none;
     color: #e5e5e5;
@@ -1167,29 +1167,29 @@ footer {
     cursor: pointer;
 }
 
-.containerInfoPersonal:hover .personalInfoLinks:hover {
+.containerInfoPersonal:hover .personalInfoLinks:hover, .invoiceLinks:hover {
     color: #000 !important;
 }
 
-.personalInfoLinks:nth-last-child(2) {
+.personalInfoLinks:nth-last-child(2), .invoiceLinks:nth-last-child(3) {
     padding-left: 1rem;
     color: #000;
 }
 
-.personalInfoLinks:nth-last-child(1) {
+.personalInfoLinks:nth-last-child(1), .invoiceLinks:nth-last-child(1) {
     padding-top: 1rem;
 }
 
-#personalInfo {
+#personalInfo, #invoice {
     width: 45%;
     margin: 1.6rem 1.37rem 8rem 4rem;
 }
 
-.containerInfoUser {
+.containerInfoUser, .containerinvoice {
     margin-top: 2rem;
 }
 
-.titleInfoUser {
+.titleInfoUser, .titleInvoice {
     font-size: 1.375rem;
 }
 
@@ -1254,7 +1254,7 @@ footer {
         display: none;
     }
 
-    #personalInfo {
+    #personalInfo, #invoice {
         width: 100%;
         margin: 2rem 1.37rem 8rem;
     }
@@ -1262,3 +1262,9 @@ footer {
 }
 
 /* END PERSONAL INFO */
+
+/* INVOICE START */
+
+
+
+/* END INVOICE */

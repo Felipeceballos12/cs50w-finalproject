@@ -10,7 +10,31 @@
         <div id="invoice">
             <h1 class="titleInvoice">INVOICE</h1>
             <div class="containerinvoice">
-                Hola
+                {% for order in orders %}
+                    <a class="orderLinks" href="#">
+                        <div class="subContainerInvoice">
+                            <div class="descriptioInvoice1">
+                                <p class="textInvoice"><span>Email:</span> {{ order.user_id }}</p>
+                                <p class="textInvoice"><span>Address:</span> {{ order.address }}</p>
+                            </div>
+                            <div class="productInvoice">
+                                {% for order_detail in orders_details %}
+                                    {% if order_detail.order_id == order.id %}
+                                        <div class="containerInvoiceProduct">
+                                            <p class="textInvoiceProduct">{{ order_detail.title }}</p>
+                                            <p class="textInvoiceProduct">-</p>
+                                            <p class="textInvoiceProduct">{{ order_detail.amount_product }}</p>
+                                        </div>
+                                    {% endif %}    
+                                {% endfor %}
+                            </div>
+                            <div  class="descriptioInvoice2">
+                                <p class="textInvoice"><span>Date:</span> {{ order.created_at }}</p>
+                                <p class="textInvoice"><span>Total:</span> {{ order.amount_pay }}</p>
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
             </div>
         </div>
     </main>

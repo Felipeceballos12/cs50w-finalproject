@@ -1289,9 +1289,8 @@ footer {
 }
 
 .subContainerInvoice:hover {
-  /* box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
-    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px; */
-  box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 }
 
 /* .subContainerInvoice div {
@@ -1312,6 +1311,10 @@ footer {
   flex-wrap: nowrap;
   align-items: center;
   justify-content: space-around;
+}
+
+.containerTitleInvoice {
+  width: 199px;
 }
 
 .textInvoiceProduct {
@@ -1351,9 +1354,9 @@ footer {
     justify-content: stretch;
   }
 
-  .textInvoiceProduct {
+  /* .textInvoiceProduct {
     padding-right: 1rem;
-  }
+  } */
 }
 
 /* END INVOICE */

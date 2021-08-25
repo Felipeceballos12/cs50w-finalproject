@@ -21,8 +21,9 @@
                                 {% for order_detail in orders_details %}
                                     {% if order_detail.order_id == order.id %}
                                         <div class="containerInvoiceProduct">
-                                            <p class="textInvoiceProduct">{{ order_detail.title }}</p>
-                                            <p class="textInvoiceProduct">-</p>
+                                            <div class="containerTitleInvoice">
+                                                <p class="textInvoiceProduct">{{ order_detail.title }}</p>
+                                            </div>
                                             <p class="textInvoiceProduct">{{ order_detail.amount_product }}</p>
                                         </div>
                                     {% endif %}    

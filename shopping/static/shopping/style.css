@@ -770,6 +770,7 @@ footer {
   #btnCart,
   #btnCarPage {
     padding: 0.7rem 2rem;
+    text-align: center;
   }
 
   #otherProductsContainer {

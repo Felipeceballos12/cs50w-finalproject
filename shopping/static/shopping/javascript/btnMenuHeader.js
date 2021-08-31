@@ -63,8 +63,8 @@ function openPageMobile(pageName) {
 
 function openPage(pageName) {
     // Escondiendo los elementos tabcontent
-    let content = document.getElementsByClassName("content")
-
+    let content = document.querySelectorAll(".content")
+    
     for(let i = 0; i < content.length; i++) {
         content[i].style.display = "none";
     }

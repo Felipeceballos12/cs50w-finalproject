@@ -10,6 +10,7 @@ addBtnProcessOrder(idFound);
 
 let btnAddProductsToCart = document.getElementsByClassName("btnAddCart");
 let countClicks = 0;
+let countClicksSecondariesBtns = 0;
 // PART OF ADD PRODUCT TO CART
 for (let i = 0; i < btnAddProductsToCart.length; i++) {
     let btnAddProductToCart = btnAddProductsToCart[i];
@@ -40,6 +41,12 @@ for (let i = 0; i < btnAddProductsToCart.length; i++) {
         if (i === 0 && countClicks === 0) {
             addBtnProcessOrder(true);
             countClicks++;
+        }
+
+        if (i == 1 || i === 2 && countClicksSecondariesBtns === 0) {
+            productClicked.innerText = "More to basket";
+            productClicked.style.backgroundColor = "#000";
+            productClicked.style.color = "#fff";
         }
     });
 }

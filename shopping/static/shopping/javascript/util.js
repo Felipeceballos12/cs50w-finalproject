@@ -11,6 +11,4 @@ export function addCartCounter(localData, localStorageData) {
         });
         cartLink.innerHTML = `CART(${count})`;
     }
-
-    console.log(count);
 }

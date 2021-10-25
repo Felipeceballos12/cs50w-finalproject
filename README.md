@@ -128,6 +128,7 @@ This page contains all the purchases made by the user in the past.
 1. Copy the repo to your system.
 2. Verify you have Python and Django installed on your system. If not you will need to install them.
 3. Run the following to start up the Django web server:
+   > python manage.py runserver
 4. Visit the website in your browser.
 5. Go to Login.
 

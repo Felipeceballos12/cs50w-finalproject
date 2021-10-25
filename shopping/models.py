@@ -19,7 +19,7 @@ class User(AbstractUser):
     isAdmin = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"{self.id}: {self.email}, {self.fist_name}, {self.last_name}, {self.cedula}, {self.address}, {self.phone_number}, {self.city}, {self.country}"
+        return f"{self.id}: {self.email}, {self.first_name}, {self.last_name}, {self.cedula}, {self.address}, {self.phone_number}, {self.city}, {self.country}"
 
 
 class Category(models.Model):

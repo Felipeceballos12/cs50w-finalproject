@@ -18,6 +18,7 @@ import random
 
 
 def index(request):
+    print(request.user)
     return render(request, "shopping/index.html")
 
 

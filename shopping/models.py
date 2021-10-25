@@ -18,8 +18,18 @@ class User(AbstractUser):
     phone_number = models.CharField(max_length=30)
     isAdmin = models.BooleanField(default=False)
 
-    def __str__(self):
-        return f"{self.id}: {self.email}, {self.first_name}, {self.last_name}, {self.cedula}, {self.address}, {self.phone_number}, {self.city}, {self.country}"
+    def serialize(self):
+        return {
+            "id": self.id,
+            "email": self.email,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "cedula": self.cedula,
+            "address": self.address,
+            "country": self.country,
+            "city": self.city,
+            "phone_number": self.phone_number
+        }
 
 
 class Category(models.Model):

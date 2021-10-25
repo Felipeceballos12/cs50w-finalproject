@@ -169,7 +169,7 @@ if (localStorageData && productsInCart.length > 0) {
             let priceProduct = product.price.slice(0, -3).trim();
             let totalForProduct = priceProduct * product.amount;
             amountProduct.push(product.amount);
-            amountToPay = totalForProduct;
+            amountToPay += totalForProduct;
         });
 
         const response = await fetch('/order', {

@@ -89,7 +89,7 @@ class Order(models.Model):
         }
 
     def __str__(self):
-        #products_array = [product for product in self.products.all()]
+        # products_array = [product for product in self.products.all()]
         return f"{self.id}: {self.user_id}, {self.status}, {self.address}, {self.amount_pay}, {self.created_at}"
 
 

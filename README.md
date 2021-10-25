@@ -143,3 +143,5 @@ This page contains all the purchases made by the user in the past.
   > password: 23456
 
 - Or, create a new user account by clicking CREATE ACCOUNT in the Login page.
+
+-

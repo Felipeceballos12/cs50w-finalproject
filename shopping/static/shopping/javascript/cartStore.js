@@ -10,12 +10,10 @@ let productsInCart = localStorageData ? JSON.parse(localStorageData) : [];
     NOTA: Esta seccion deberia estar separada de store?
 */
 
-addCartCounter(productsInCart, localStorageData);
-
 let containerCartPage = document.getElementById("cartContainer");
 
 if (localStorageData && productsInCart.length > 0) {
-    
+
     // Creando los elementos a usar en cart page
     let countProducts = counterProdcuts(productsInCart);
     let titlePage = document.createElement('h3');
@@ -27,7 +25,7 @@ if (localStorageData && productsInCart.length > 0) {
     let totalToPay = document.createElement('h5');
     let orderForm = document.createElement('form');
     let subContainerPayAction = document.createElement('div');
-    
+
     // Agregando los datos a los elementos
     titlePage.innerHTML = "SHOPPING BAG";
     countItems.innerHTML = `${countProducts} ITEM(S)`;
@@ -44,8 +42,8 @@ if (localStorageData && productsInCart.length > 0) {
     btnPayAction.className = "btnPayAction";
     orderForm.id = "orderForm";
     subContainerPayAction.className = "subContainerPayAction"
-    
-    
+
+
     // Agregando elementos a su padre containerCartPage
     containerCartPage.appendChild(titlePage);
     containerCartPage.appendChild(countItems);
@@ -61,33 +59,33 @@ if (localStorageData && productsInCart.length > 0) {
 
     // Recorriendo un Loop para mostrar los productos agregados al cart
     productsInCart.forEach(productInCart => {
-        
+
         let containerProduct = document.createElement('div');
 
         containerProduct.innerHTML = `
-                        <img class="imgCartProduct img_p" src="${ productInCart.img }" alt="Zara">
-                        <input type="hidden" class="product_items" id="${ productInCart.id }">
+                        <img class="imgCartProduct img_p" src="${productInCart.img}" alt="Zara">
+                        <input type="hidden" class="product_items" id="${productInCart.id}">
                         <div class="description_cart_product">
-                            <p class="titleCartProduct title_p">${ productInCart.title }</p>
-                            <p class="priceCartProduct price_p">${ productInCart.price }</p>
+                            <p class="titleCartProduct title_p">${productInCart.title}</p>
+                            <p class="priceCartProduct price_p">${productInCart.price}</p>
                             <div class="addLessItem">
                                 <a class="btnLessProduct">
                                     <img src="https://img.icons8.com/material-rounded/12/000000/minus-math--v1.png" alt="btnless"/>
                                 </a>
-                                <p class="titleCartProduct amount_p">${ productInCart.amount }</p>
+                                <p class="titleCartProduct amount_p">${productInCart.amount}</p>
                                 <a class="btnAddProduct">
                                     <img src="https://img.icons8.com/material-sharp/12/000000/plus-math--v1.png" alt="btnplus"/>
                                 </a>
                             </div>
                             <a class="btnRemove">
-                                <img id="${ productInCart.id }" class="btnDeleteItem" src="https://img.icons8.com/material-outlined/16/000000/trash--v2.png" alt="trash"/>
+                                <img id="${productInCart.id}" class="btnDeleteItem" src="https://img.icons8.com/material-outlined/16/000000/trash--v2.png" alt="trash"/>
                             </a>    
                         </div>    
         `;
 
         containerProducts.appendChild(containerProduct);
         containerProduct.className = 'containerCartProduct';
-        
+
     });
 
     // ADD AND REDUCER ITEMS 
@@ -100,12 +98,12 @@ if (localStorageData && productsInCart.length > 0) {
                 localStorage.setItem('addProductsInCart', JSON.stringify(productsInCart));
 
                 totalPayForProducts(productsInCart, totalToPay);
-                
+
                 amountProduct[x].innerText = productsInCart[x].amount;
                 let countItemAfterAdd = counterProdcuts(productsInCart);
                 countItems.innerHTML = `${countItemAfterAdd} ITEM(S)`;
-                addCartCounter(productsInCart, localStorageData);
-            }    
+                addCartCounter(productsInCart);
+            }
         });
     }
 
@@ -119,21 +117,21 @@ if (localStorageData && productsInCart.length > 0) {
                 amountProduct[j].innerText = productsInCart[j].amount;
                 let countItemAfterReduce = counterProdcuts(productsInCart);
                 countItems.innerHTML = `${countItemAfterReduce} ITEM(S)`;
-                addCartCounter(productsInCart, localStorageData);
+                addCartCounter(productsInCart);
                 totalPayForProducts(productsInCart, totalToPay);
             }
         });
     }
 
     // DELETE ITEM FROM CART
-    window.addEventListener('click',  (event) => {
+    window.addEventListener('click', (event) => {
         let productCR = event.target;
-        
+
         if (productCR.className === "btnDeleteItem") {
             //let productsInStore = productsInCart.filter(product => product.id != productCR.id);
             productsInCart = productsInCart.filter(product => product.id != productCR.id);
             localStorage.setItem('addProductsInCart', JSON.stringify(productsInCart));
-            
+
             // Modificando el cuerpo del cart.html
             let productItemRemove = productCR.parentElement.parentElement.parentElement;
 
@@ -142,7 +140,7 @@ if (localStorageData && productsInCart.length > 0) {
 
             if (countItemAfterRemove > 0) {
                 countItems.innerHTML = `${countItemAfterRemove} ITEM(S)`;
-                addCartCounter(productsInCart, localStorageData);
+                addCartCounter(productsInCart);
                 totalPayForProducts(productsInCart, totalToPay);
             } else {
                 titlePage.style.display = "none";
@@ -150,13 +148,13 @@ if (localStorageData && productsInCart.length > 0) {
                 containerProducts.style.display = "none";
                 containerPayAction.style.display = "none";
                 localStorage.removeItem("addProductsInCart");
-                addCartCounter(productsInCart, localStorageData);
+                addCartCounter(productsInCart);
                 cartEmpty(containerCartPage);
-                
+
             }
 
-            
-        }    
+
+        }
     });
 
     document.querySelector("#orderForm").onsubmit = async function (e) {
@@ -201,7 +199,7 @@ if (localStorageData && productsInCart.length > 0) {
 
 function counterProdcuts(localData) {
     let countProducts = 0;
-    
+
     localData.forEach(productInCart => {
         countProducts += productInCart.amount;
     });
@@ -213,18 +211,18 @@ function cartEmpty(cartContainer) {
     let menssage = document.createElement('p');
     menssage.id = "noProductsInBasket";
     menssage.innerHTML = "Your basket is empty";
-    
+
     cartContainer.appendChild(menssage);
 }
 
 function totalPayForProducts(dataStorage, elementTotalToPay) {
     let totalPayProducts = 0;
-    
+
     dataStorage.forEach(productPrice => {
         let priceProduct = productPrice.price.slice(0, -3).trim();
         let totalForProduct = priceProduct * productPrice.amount;
         totalPayProducts += totalForProduct;
     });
 
-    elementTotalToPay.innerHTML = `TOTAL ${ totalPayProducts.toFixed(2) } USD`;
+    elementTotalToPay.innerHTML = `TOTAL ${totalPayProducts.toFixed(2)} USD`;
 }

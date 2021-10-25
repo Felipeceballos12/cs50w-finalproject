@@ -178,7 +178,6 @@ def search(request):
             name_search = request.GET['q']
             content_search = Product.objects.filter(
                 title__icontains=name_search)
-            print(content_search)
             if content_search:
                 return render(request, "shopping/search.html", {
                     "display_btn_search": True,
@@ -207,7 +206,6 @@ def order(request):
         return JsonResponse({"error": "POST request required."}, status=400)
 
     data_received = json.loads(request.body)
-    print(data_received)
     products = [product.strip()
                 for product in data_received.get("products").split(",")]
     amount_products = [amount.strip() for amount in data_received.get(

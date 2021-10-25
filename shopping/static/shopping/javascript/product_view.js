@@ -11,6 +11,7 @@ addBtnProcessOrder(idFound);
 let btnAddProductsToCart = document.getElementsByClassName("btnAddCart");
 let countClicks = 0;
 let countClicksSecondariesBtns = 0;
+
 // PART OF ADD PRODUCT TO CART
 for (let i = 0; i < btnAddProductsToCart.length; i++) {
     let btnAddProductToCart = btnAddProductsToCart[i];
@@ -31,7 +32,7 @@ for (let i = 0; i < btnAddProductsToCart.length; i++) {
         // Saving the new item into the local storage
         localStorage.setItem('addProductsInCart', JSON.stringify(productsInCart));
         
-        addCartCounter(productsInCart, localStorageData);
+        addCartCounter(productsInCart);
         
         /* 
             PART OF ADD BTN "PROCESS ORDER" WHEN THE USER CLICK ON FIRST TIME TO THE BTN "ADD TO BASKET"
@@ -119,5 +120,3 @@ function findIdProduct(storeData) {
 
     return idFound;
 }
-
-addCartCounter(productsInCart, localStorageData);

@@ -13,8 +13,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
-#Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -123,7 +123,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# Message Storage from 
+# Message Storage from
 # https://stackoverflow.com/questions/14999134/how-to-pass-a-message-from-httpresponseredirect-in-django?fbclid=IwAR1pwmL0V6oqfq1kIDrbj76e_CVb2XShUZ-0-76SPmfbTEDjwOqG8QdEJ1Q
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'

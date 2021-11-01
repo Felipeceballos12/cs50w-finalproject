@@ -1,6 +1,6 @@
 # Overview
 
-**Felipex** is an ecommerce inspired by the Zara website in which you can register or log in to search and buy clothes according to your tastes.
+**shopping** is an ecommerce inspired by the Zara website in which you can register or log in to search and buy clothes according to your tastes.
 
 This website was a great challenge for me, since all the design was done in CSS without using any framework. I was able to achieve the design that I wanted and also make the website completely responsive. Also, I built the functionality of the shopping cart completely in JavaScript, which is different to anything that we have seen on the course.
 
@@ -8,19 +8,68 @@ This website was a great challenge for me, since all the design was done in CSS 
 
 According to the specification, my project must adhere to the following guidelines:
 
-> A project that appears to be an e-commerce site is strongly suspected to be indistinct from Project 2, and your README.md file should be very clear as to why it’s not. Failing that, it should not be submitted; it will be rejected.
+> Your web application must be sufficiently distinct from the other projects in this course (and, in addition, may not be based on the old CS50W Pizza project), and more complex than those. A project that appears to be an e-commerce site is strongly suspected to be indistinct from Project 2, and your README.md file should be very clear as to why it’s not. Failing that, it should not be submitted; it will be rejected.
 
-My project is different from Commerce for two reasons:
+My project is different from Commerce, and more complex than the other projects, for the following reasons:
 
 1. The home page has a dynamic menu, built using JavaScript. When we click on one of the three images (children, woman and man) it will display the product categories depending on which image has been clicked.
 
-2. I built shopping cart functionality using JavaScript and LocalStorage, which was a big challenge for me:
+2. I built shopping cart functionality from scratch using JavaScript and LocalStorage, which was a big challenge for me. The functionality works in the following way:
 
-- When the user clicks on "Add to basket" the product will be saved in the LocalStorage. In LocalStorage, we store an array containing objects of each product added to the cart with all of the relevant product information.
+- When the user clicks on "Add to basket", the user is able to add items to the basket dynamically using JavaScript and LocalStorage. In LocalStorage, we store an array containing objects of each product added to the cart with all of the relevant product information. The page is updated dynamically to show the total items in the top-right corner.
 
-- The user is able to add items to basket dynamically using JavaScript. On the shopping cart page, there are buttons to increase and decrease the units of the same product. The visibility of these buttons is according to the availability of the product (saved in LocalStorage).
+- On the shopping cart page, there are buttons to increase and decrease the units of the same product. The visibility of these buttons is according to the availability of the product (saved in LocalStorage). The page is updated to reflect the changes the user makes without reloading the page.
 
-- On the shopping cart page, the user is able to delete a product from their basket which deletes the product from the LocalStorage array. The array is rearranged completely in order to not leave an empty space in the array. This was a very complex part of the build.
+- On the shopping cart page, the user is able to delete a product from their basket completely which deletes the product from the LocalStorage array and updates the page dynamically. The array is rearranged completely in order to not leave an empty space in the array. This was a very complex part of the build.
+
+3. When a user processes an order, the data is passed from LocalStorage to the database using JavaScript and a POST request to the /orderdetails route.
+
+4. The website has two user types: standard and admin. The website has a separate admin view (for users with the isAdmin flag set to true in the User model), where users can add new products to the database. This page is blocked for standard users.
+
+5. I built the entire project using custom CSS, without Bootstrap, making mockups of the design in Adobe XD as part of my process.
+
+> Your web application must utilize Django (including at least one model) on the back-end and JavaScript on the front-end.
+
+My application was built using Django, including 5 models on the back-end and uses 7 different JavaScript scripts to make dynamic updates on the front-end.
+
+> Your web application must be mobile-responsive
+
+Every page and feature of the web application is mobile-responsive and this is achieved using just CSS.
+
+In the following section I will explain what is in every file.
+
+# Files and directories
+
+- `shopping` - application main directory.
+  - `models` - contains all the models used in the application.
+  - `urls` - all urls used in the application.
+  - `views` - contains all application views.
+  - `admin` - Here the Super User was added to make use of it in models
+  - `static/shopping` - Contains all static content.
+    - `imgs` - images used on the homepage.
+    - `javascript` - all JavaScript files in the project.
+      - `activeCounterToThePages.js` - call the function "addCartCounter" into the all pages.
+      - `btnMenuHeader.js` - contains the code for the menu button and the display of the links.
+      - `cartStore.js` - contains all the logic for the shopping cart page.
+      - `localStorageData.js` - creation of the Local Storage to add the products to the cart.
+      - `product_view.js` - logic to add products to the cart and "proceed to order", when the cart is added for the first time.
+      - `search.js` - small change in the background color of the header and padding bottom.
+      - `util.js` - function that is used in most scripts.
+    - `style.css` - CSS files.
+  - `template/shopping` - all application templates.
+    - `admin.html` - page to add new clothing products, although only admin users have access to the page.
+    - `cart.html` - page of the products added to the cart.
+    - `index.html` - home page
+    - `invoice.html` - page where all the purchases made by the user are shown.
+    - `layout.html` - layout page used in all other pages.
+    - `login.html` - page to start session, if you have an account
+    - `order.html` - page where the user can buy the products.
+    - `personal_details.html` - page where user information can be modified.
+    - `profile.html` - page that opens the Invoice menu, personal details and logout.
+    - `register.html` - page where you can register a user who does not have an account.
+    - `search.html` - page where we can search for a product of our interest according to the name.
+    - `view_product.html` - page where the selected product is displayed from the category of your interest.
+    - `view_products.html` - page where all the products are displayed according to the category selected by the user.
 
 # Routes
 
@@ -89,39 +138,6 @@ This page contains all the information of the user which was entered at the time
 ### User Invoice `/user/invoice`
 
 This page contains all the purchases made by the user in the past.
-
-# Files and directories
-
-- `shopping` - application main directory.
-  - `models` - contains all the models used in the application.
-  - `urls` - all urls used in the application.
-  - `views` - contains all application views.
-  - `admin` - Here the Super User was added to make use of it in models
-  - `static/shopping` - Contains all static content.
-    - `imgs` - images used on the homepage.
-    - `javascript` - all JavaScript files in the project.
-      - `activeCounterToThePages` - call the function "addCartCounter" into the all pages.
-      - `btnMenuHeader.js` - contains the code for the menu button and the display of the links.
-      - `cartStore.js` - contains all the logic for the shopping cart page.
-      - `localStorageData.js` - creation of the Local Storage to add the products to the cart.
-      - `product_view.js` - logic to add products to the cart and "proceed to order", when the cart is added for the first time.
-      - `search.js` - small change in the background color of the header and padding bottom.
-      - `util.js` - function that is used in most scripts.
-    - `style.css` - CSS files.
-  - `template/shopping` - all application templates.
-    - `admin.html` - page to add new clothing products, although only admin users have access to the page.
-    - `cart.html` - page of the products added to the cart.
-    - `index.html` - home page
-    - `invoice.html` - page where all the purchases made by the user are shown.
-    - `layout.html` - layout page used in all other pages.
-    - `login.html` - page to start session, if you have an account
-    - `order.html` - page where the user can buy the products.
-    - `personal_details.html` - page where user information can be modified.
-    - `profile.html` - page that opens the Invoice menu, personal details and logout.
-    - `register.html` - page where you can register a user who does not have an account.
-    - `search.html` - page where we can search for a product of our interest according to the name.
-    - `view_product.html` - page where the selected product is displayed from the category of your interest.
-    - `view_products.html` - page where all the products are displayed according to the category selected by the user.
 
 # How to run the application
 

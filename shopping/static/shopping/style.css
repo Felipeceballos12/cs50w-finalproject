@@ -364,6 +364,13 @@ footer {
 /* Tablet Start */
 
 @media screen and (max-width: 786px) {
+  .decorationLinea {
+    width: 127px;
+    margin: 0 30px;
+  }
+}
+
+@media screen and (max-width: 800px) {
   #woman {
     width: 250px;
   }
@@ -372,16 +379,27 @@ footer {
   #kid {
     width: 190px;
   }
-
-  .decorationLinea {
-    width: 127px;
-    margin: 0 30px;
-  }
 }
 
 /* Tablet End */
 
 /* Mobile Start*/
+
+@media screen and (max-width: 630px) {
+  #headerOfTheLinks {
+    display: none;
+  }
+
+  #man,
+  #kid,
+  #woman {
+    width: 250px;
+  }
+
+  .containerImgs {
+    flex-direction: column;
+  }
+}
 
 @media screen and (max-width: 576px) {
   .search {
@@ -408,24 +426,10 @@ footer {
     cursor: pointer;
   }
 
-  #headerOfTheLinks {
-    display: none;
-  }
-
   .headerSideNav {
     display: flex;
     justify-content: center;
     margin-top: 1rem;
-  }
-
-  .containerImgs {
-    flex-direction: column;
-  }
-
-  #man,
-  #kid,
-  #woman {
-    width: 250px;
   }
 
   #footerNameCompany {

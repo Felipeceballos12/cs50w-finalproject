@@ -4,6 +4,8 @@
 
 This website was a great challenge for me, since all the design was done in CSS without using any framework. I was able to achieve the design that I wanted and also make the website completely responsive. Also, I built the functionality of the shopping cart completely in JavaScript, which is different to anything that we have seen on the course.
 
+Link of the video -> https://youtu.be/XTHXoIqpOpY
+
 # Distinctiveness and Complexity
 
 According to the specification, my project must adhere to the following guidelines:
